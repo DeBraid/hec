@@ -16,13 +16,22 @@ d3.json('/js/citiesgdp.json', function ( error, data ) {
   data.forEach(function (d){
     
     var headers = Object.keys(data[0]);
-    console.log(headers);
 
-    var arr = _.zip(d.Period, d.Toronto);
-    console.log(arr);
+    headers.forEach(function(header) {
+      var gdp = _.zip(d.Period, d[header]); 
+      console.log(gdp);
+      
+      
 
-    
-  
+      // var arrInv = _.invoke(d.Period, d.Toronto, 'sort');
+      // console.log(arrInv);
+      // console.log('arrInv - ');
+      
+      // var arrZip = _.zip(d.Period, d.Toronto);
+      // console.log(arrZip);
+      // console.log('arrZip - - ');
+
+    })
   })
 
   
