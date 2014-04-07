@@ -1,6 +1,7 @@
-var gdp = {};
-var income = {};
-var uRate = {};
+var newData = [],
+    gdp = {},
+    income = {},
+    uRate = {};
 
 
 d3.json('/js/citiesgdp.json', function ( error, data ) { 
@@ -21,6 +22,8 @@ d3.json('/js/citiesgdp.json', function ( error, data ) {
 
   var arrGdp = [gdp];
   // console.log(arrGdp);
+  newData.push({'gdp': gdp});
+  
 
 });
 
@@ -41,6 +44,8 @@ d3.json('/js/citiesIncome.json', function ( error, data ) {
   });
 
   var arrInc= [income];
+  newData.push({'income': income});
+
   
 
 });
@@ -63,8 +68,16 @@ d3.json('/js/unemprate.json', function ( error, data ) {
   });
 
   var arrRate= [uRate];
-  console.log(arrRate);
-  console.log(arrRate.length);
+  // console.log(arrRate);
+  // console.log(arrRate.length);
+
+  newData.push({'uRate': uRate});
+
+  console.log(newData);
+  console.log('newData ^ '); 
 
 });
+
+
+
 
