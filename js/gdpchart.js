@@ -102,7 +102,7 @@ d3.json('/js/unemprate.json', function ( error, data ) {
 
 
   console.log(myJSON);
-  console.log('myJSON ^^^');
+  console.log('myJSON');
   
 
 });
