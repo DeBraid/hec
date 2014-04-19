@@ -1,18 +1,29 @@
 var newData = [],
+    myJSON = [],
     gdp = {},
     income = {},
     uRate = {};
 
-
 d3.json('/js/citiesgdp.json', function ( error, data ) { 
   
   data.forEach(function ( d ) {
-    var headers = Object.keys(data[0]);
+    var cities = Object.keys(data[0]);
 
-    headers.forEach(function ( header ) {
-      // zip combines 2 arrays by matching 
-      // values at same index position
-      gdp[header] = _.zip(d.Period, d[header]);
+    cities.forEach(function ( city ) {
+
+      gdp[city] = _.zip(d.Period, d[city]);
+
+      var gdpByCity = [];
+
+      gdpByCity.push(gdp[city]);
+
+      var cityByCityData =  {
+        "city": city,
+        "region": "foo",
+        "gdp": gdpByCity   
+      };
+    
+    myJSON.push(cityByCityData);
 
     });
   
@@ -20,8 +31,6 @@ d3.json('/js/citiesgdp.json', function ( error, data ) {
 
   });
 
-  var arrGdp = [gdp];
-  // console.log(arrGdp);
   newData.push({'gdp': gdp});
   
 
@@ -31,11 +40,23 @@ d3.json('/js/citiesgdp.json', function ( error, data ) {
 d3.json('/js/citiesIncome.json', function ( error, data ) { 
   
   data.forEach(function ( d ) {
-    var headers = Object.keys(data[0]);
+    var cities = Object.keys(data[0]);
 
-    headers.forEach(function ( header ) {
+    cities.forEach(function ( city ) {
       
-      income[header] = _.zip(d.Period, d[header]);
+      income[city] = _.zip(d.Period, d[city]);
+
+      var incomeByCity = [];
+
+      incomeByCity.push(income[city]);
+
+      var cityByCityData =  {
+        "city": city,
+        "region": "foo",
+        "income": incomeByCity   
+      };
+    
+    myJSON.push(cityByCityData);
 
     });
   
@@ -43,7 +64,6 @@ d3.json('/js/citiesIncome.json', function ( error, data ) {
 
   });
 
-  var arrInc= [income];
   newData.push({'income': income});
 
   
@@ -54,27 +74,36 @@ d3.json('/js/citiesIncome.json', function ( error, data ) {
 d3.json('/js/unemprate.json', function ( error, data ) { 
   
   data.forEach(function ( d ) {
-    var headers = Object.keys(data[0]);
+    
+    var cities = Object.keys(data[0]);
 
-    headers.forEach(function ( header ) {
-      // zip combines 2 arrays by matching 
-      // values at same index position
-      uRate[header] = _.zip(d.Period, d[header]);
+    cities.forEach(function ( city ) {
+
+      uRate[city] = _.zip(d.Period, d[city]);
+
+      var uRateByCity = [];
+
+      uRateByCity.push(uRate[city]);
+
+      var cityByCityData =  {
+        "city": city,
+        "region": "foo",
+        "uRate": uRateByCity   
+      };
+    
+      myJSON.push(cityByCityData);
 
     });
   
     return uRate;
-
   });
-
-  var arrRate= [uRate];
-  // console.log(arrRate);
-  // console.log(arrRate.length);
 
   newData.push({'uRate': uRate});
 
-  console.log(newData);
-  console.log('newData ^ '); 
+
+  console.log(myJSON);
+  console.log('myJSON ^^^');
+  
 
 });
 
