@@ -1,5 +1,6 @@
 var newData = [],
     myJSON = [],
+    lastData = [],
     gdp = {},
     income = {},
     uRate = {};
@@ -88,7 +89,7 @@ d3.json('/js/unemprate.json', function ( error, data ) {
       var cityByCityData =  {
         "city": city,
         "region": "foo",
-        "uRate": uRateByCity   
+        "uRate": uRateByCity  
       };
     
       myJSON.push(cityByCityData);
@@ -100,10 +101,33 @@ d3.json('/js/unemprate.json', function ( error, data ) {
 
   newData.push({'uRate': uRate});
 
+  myJSON.map(function ( d , i ) { 
+        
+      if (d.city == d.city ) { 
+      
+        var moo = { 
+            "city": d.city,
+            'gdp': d.gdp, 
+        } 
 
-  console.log(myJSON);
-  console.log('myJSON');
-  
+        var mob = { 
+            "city": d.city,
+            "income": d.income, 
+        } 
+
+        var cob = { 
+            "city": d.city,
+            "uRate": d.uRate, 
+        } 
+        
+        var haz = _.merge(moo,mob,cob);
+
+        lastData.push(haz);
+
+
+      } 
+  })
+      console.log(lastData);
 
 });
 
