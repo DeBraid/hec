@@ -1,7 +1,5 @@
 // refactor with queue.js
-var newData = [],
-    myJSON = [],
-    myGDP = [],
+var myGDP = [],
     myURATE = [],
     myINCOME = [];
 
@@ -21,14 +19,10 @@ function makeChart ( error, gdp, income, uRate ) {
 
       gdp[city] = _.zip(d.Period, d[city]);
 
-      var gdpByCity = [];
-
-      gdpByCity.push(gdp[city]);
-
       var cityByCityGdp =  {
         "city": city,
         "region": "foo",
-        "gdp": gdpByCity   
+        "gdp": gdp[city]   
       };
 
       myGDP.push(cityByCityGdp);
@@ -39,14 +33,10 @@ function makeChart ( error, gdp, income, uRate ) {
 
       income[city] = _.zip(d.Period, d[city]);
 
-      var incomeByCity = [];
-
-      incomeByCity.push(income[city]);
-
       var cityByCityIncome =  {
         "city": city,
         "region": "foo",
-        "income": incomeByCity   
+        "income": income[city]   
       };
 
       myINCOME.push(cityByCityIncome);
@@ -57,14 +47,10 @@ function makeChart ( error, gdp, income, uRate ) {
 
       uRate[city] = _.zip(d.Period, d[city]);
 
-      var uRateByCity = [];
-
-      uRateByCity.push(uRate[city]);
-
       var cityByCityuRate =  {
         "city": city,
         "region": "foo",
-        "uRate": uRateByCity   
+        "uRate": uRate[city]   
       };
 
       myURATE.push(cityByCityuRate);
@@ -73,7 +59,7 @@ function makeChart ( error, gdp, income, uRate ) {
 
   });
   
-  var moo = _.merge(myGDP,myINCOME, myURATE);
-  console.log(moo);
-  
+  var finalData = _.merge(myGDP,myINCOME, myURATE);
+  console.log(finalData);
+  // console.log(JSON.stringify(finalData));
 };  
