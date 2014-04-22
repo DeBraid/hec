@@ -1,3 +1,5 @@
+// 3 seperate objects, not merging correctly
+
 var newData = [],
     myJSON = [],
     lastData = [],
