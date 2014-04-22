@@ -1,9 +1,9 @@
 // Various accessors that specify the four dimensions of data to visualize.
 function x(d) { return d.income; }
-function y(d) { return d.lifeExpectancy; }
-function radius(d) { return d.population; }
+function y(d) { return d.gdp; }
+function radius(d) { return d.uRate; }
 function color(d) { return d.region; }
-function key(d) { return d.name; }
+function key(d) { return d.city; }
 
 // Chart dimensions.
 var margin = {top: 19.5, right: 19.5, bottom: 19.5, left: 39.5},
@@ -11,9 +11,9 @@ var margin = {top: 19.5, right: 19.5, bottom: 19.5, left: 39.5},
     height = 500 - margin.top - margin.bottom;
 
 // Various scales. These domains make assumptions of data, naturally.
-var xScale = d3.scale.log().domain([300, 1e5]).range([0, width]),
-    yScale = d3.scale.linear().domain([10, 85]).range([height, 0]),
-    radiusScale = d3.scale.sqrt().domain([0, 5e8]).range([0, 40]),
+var xScale = d3.scale.log().domain([15e3, 40e3]).range([0, width]),
+    yScale = d3.scale.linear().domain([5e3, 4e5]).range([height, 0]),
+    radiusScale = d3.scale.sqrt().domain([0, 20]).range([0, 28]),
     colorScale = d3.scale.category10();
 
 // The x & y axes.
@@ -61,19 +61,19 @@ var label = svg.append("text")
     .attr("text-anchor", "end")
     .attr("y", height - 24)
     .attr("x", width)
-    .text(1800);
+    .text(1987);
 
 // Load the data.
-d3.json("/js/nations.json", function(nations) {
+d3.json("/js/myNations.json", function(nations) {
 
   // A bisector since many nation's data is sparsely-defined.
   var bisect = d3.bisector(function(d) { return d[0]; });
 
-  // Add a dot per nation. Initialize the data at 1800, and set the colors.
+  // Add a dot per nation. Initialize the data at 1987, and set the colors.
   var dot = svg.append("g")
       .attr("class", "dots")
     .selectAll(".dot")
-      .data(interpolateData(1800))
+      .data(interpolateData(1987))
     .enter().append("circle")
       .attr("class", "dot")
       .style("fill", function(d) { return colorScale(color(d)); })
@@ -82,7 +82,7 @@ d3.json("/js/nations.json", function(nations) {
 
   // Add a title.
   dot.append("title")
-      .text(function(d) { return d.name; });
+      .text(function(d) { return d.city; });
 
   // Add an overlay for the year label.
   var box = label.node().getBBox();
@@ -117,7 +117,7 @@ d3.json("/js/nations.json", function(nations) {
   // After the transition finishes, you can mouseover to change the year.
   function enableInteraction() {
     var yearScale = d3.scale.linear()
-        .domain([1800, 2009])
+        .domain([1987, 2009])
         .range([box.x + 10, box.x + box.width - 10])
         .clamp(true);
 
@@ -146,7 +146,7 @@ d3.json("/js/nations.json", function(nations) {
   // Tweens the entire chart by first tweening the year, and then the data.
   // For the interpolated data, the dots and label are redrawn.
   function tweenYear() {
-    var year = d3.interpolateNumber(1800, 2009);
+    var year = d3.interpolateNumber(1987, 2009);
     return function(t) { displayYear(year(t)); };
   }
 
@@ -160,11 +160,11 @@ d3.json("/js/nations.json", function(nations) {
   function interpolateData(year) {
     return nations.map(function(d) {
       return {
-        name: d.name,
+        city: d.city,
         region: d.region,
         income: interpolateValues(d.income, year),
-        population: interpolateValues(d.population, year),
-        lifeExpectancy: interpolateValues(d.lifeExpectancy, year)
+        uRate: interpolateValues(d.uRate, year),
+        gdp: interpolateValues(d.gdp, year)
       };
     });
   }
