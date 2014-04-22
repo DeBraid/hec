@@ -11,9 +11,9 @@ var margin = {top: 19.5, right: 19.5, bottom: 19.5, left: 39.5},
     height = 500 - margin.top - margin.bottom;
 
 // Various scales. These domains make assumptions of data, naturally.
-var xScale = d3.scale.log().domain([15e3, 40e3]).range([0, width]),
-    yScale = d3.scale.linear().domain([5e3, 4e5]).range([height, 0]),
-    radiusScale = d3.scale.sqrt().domain([0, 20]).range([0, 28]),
+var xScale = d3.scale.linear().domain([16e3, 40e3]).range([0, width]),
+    yScale = d3.scale.log().domain([1e3, 4e5]).range([height, 0]),
+    radiusScale = d3.scale.sqrt().domain([3, 16]).range([30, 3]),
     colorScale = d3.scale.category10();
 
 // The x & y axes.
@@ -53,7 +53,7 @@ svg.append("text")
     .attr("y", 6)
     .attr("dy", ".75em")
     .attr("transform", "rotate(-90)")
-    .text("life expectancy (years)");
+    .text("GDP");
 
 // Add the year label; the value is set on transition.
 var label = svg.append("text")
@@ -97,7 +97,7 @@ d3.json("/js/myNations.json", function(nations) {
 
   // Start a transition that interpolates the data based on year.
   svg.transition()
-      .duration(30000)
+      .duration(50000)
       .ease("linear")
       .tween("year", tweenYear)
       .each("end", enableInteraction);
@@ -117,7 +117,7 @@ d3.json("/js/myNations.json", function(nations) {
   // After the transition finishes, you can mouseover to change the year.
   function enableInteraction() {
     var yearScale = d3.scale.linear()
-        .domain([1987, 2009])
+        .domain([1987, 2018])
         .range([box.x + 10, box.x + box.width - 10])
         .clamp(true);
 
@@ -146,7 +146,7 @@ d3.json("/js/myNations.json", function(nations) {
   // Tweens the entire chart by first tweening the year, and then the data.
   // For the interpolated data, the dots and label are redrawn.
   function tweenYear() {
-    var year = d3.interpolateNumber(1987, 2009);
+    var year = d3.interpolateNumber(1987, 2018);
     return function(t) { displayYear(year(t)); };
   }
 
