@@ -17,44 +17,58 @@ function makeChart ( error, gdp, income, uRate ) {
   
     gdp.forEach(function ( d ) {
 
-      gdp[city] = _.zip(d.Period, d[city]);
+      if ( _.isNull(d[city]) == false ) {
 
-      var cityByCityGdp =  {
-        "city": city,
-        "region": "foo",
-        "gdp": gdp[city]   
-      };
+        gdp[city] = _.zip(d.Period, d[city]);
 
-      myGDP.push(cityByCityGdp);
+        var cityByCityGdp =  {
+          "city": city,
+          "region": "foo",
+          "gdp": gdp[city]   
+        };
+
+        myGDP.push(cityByCityGdp);
+
+      }
   
     });
 
     income.forEach(function ( d ) {
 
-      income[city] = _.zip(d.Period, d[city]);
+      if ( _.isNull(d[city]) == false ) {
 
-      var cityByCityIncome =  {
-        "city": city,
-        "region": "foo",
-        "income": income[city]   
-      };
+        income[city] = _.zip(d.Period, d[city]);
 
-      myINCOME.push(cityByCityIncome);
+        var cityByCityIncome =  {
+          "city": city,
+          "region": "foo",
+          "income": income[city]   
+        };
+
+        myINCOME.push(cityByCityIncome);
+
+      }
   
     });
 
     uRate.forEach(function ( d ) {
 
-      uRate[city] = _.zip(d.Period, d[city]);
+      console.log(_.isNull(d[city]));
+      
+      if ( _.isNull(d[city]) === false ) {
 
-      var cityByCityuRate =  {
-        "city": city,
-        "region": "foo",
-        "uRate": uRate[city]   
-      };
+        uRate[city] = _.zip(d.Period, d[city]);
 
-      myURATE.push(cityByCityuRate);
+        var cityByCityuRate =  {
+          "city": city,
+          "region": "foo",
+          "uRate": uRate[city]   
+        };
+
+        myURATE.push(cityByCityuRate);
   
+      }
+
     });
 
   });
