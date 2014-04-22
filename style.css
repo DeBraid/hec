@@ -37,3 +37,7 @@ text {
   pointer-events: all;
   cursor: ew-resize;
 }
+
+#adopted {
+  font-size: 0.7em;
+}
