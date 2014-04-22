@@ -1,18 +1,23 @@
-// 3 seperate objects, not merging correctly
-
+// refactor with queue.js
 var newData = [],
     myJSON = [],
-    lastData = [],
-    gdp = {},
-    income = {},
-    uRate = {};
+    myGDP = [],
+    myURATE = [],
+    myINCOME = [];
 
-d3.json('/js/citiesgdp.json', function ( error, data ) { 
+queue()
+  .defer(d3.json, '/js/citiesgdp.json')
+  .defer(d3.json, '/js/citiesIncome.json')
+  .defer(d3.json, '/js/unemprate.json')
+  .await(makeChart);
+
+function makeChart ( error, gdp, income, uRate ) {
   
-  data.forEach(function ( d ) {
-    var cities = Object.keys(data[0]);
-
-    cities.forEach(function ( city ) {
+  var cities = Object.keys(gdp[0]);
+  
+  cities.forEach(function ( city ) {
+  
+    gdp.forEach(function ( d ) {
 
       gdp[city] = _.zip(d.Period, d[city]);
 
@@ -20,67 +25,35 @@ d3.json('/js/citiesgdp.json', function ( error, data ) {
 
       gdpByCity.push(gdp[city]);
 
-      var cityByCityData =  {
+      var cityByCityGdp =  {
         "city": city,
         "region": "foo",
         "gdp": gdpByCity   
       };
-    
-    myJSON.push(cityByCityData);
 
+      myGDP.push(cityByCityGdp);
+  
     });
-  
-    return gdp;
 
-  });
+    income.forEach(function ( d ) {
 
-  newData.push({'gdp': gdp});
-  
-
-});
-
-
-d3.json('/js/citiesIncome.json', function ( error, data ) { 
-  
-  data.forEach(function ( d ) {
-    var cities = Object.keys(data[0]);
-
-    cities.forEach(function ( city ) {
-      
       income[city] = _.zip(d.Period, d[city]);
 
       var incomeByCity = [];
 
       incomeByCity.push(income[city]);
 
-      var cityByCityData =  {
+      var cityByCityIncome =  {
         "city": city,
         "region": "foo",
         "income": incomeByCity   
       };
-    
-    myJSON.push(cityByCityData);
 
+      myINCOME.push(cityByCityIncome);
+  
     });
-  
-    return income;
 
-  });
-
-  newData.push({'income': income});
-
-  
-
-});
-
-
-d3.json('/js/unemprate.json', function ( error, data ) { 
-  
-  data.forEach(function ( d ) {
-    
-    var cities = Object.keys(data[0]);
-
-    cities.forEach(function ( city ) {
+    uRate.forEach(function ( d ) {
 
       uRate[city] = _.zip(d.Period, d[city]);
 
@@ -88,51 +61,19 @@ d3.json('/js/unemprate.json', function ( error, data ) {
 
       uRateByCity.push(uRate[city]);
 
-      var cityByCityData =  {
+      var cityByCityuRate =  {
         "city": city,
         "region": "foo",
-        "uRate": uRateByCity  
+        "uRate": uRateByCity   
       };
-    
-      myJSON.push(cityByCityData);
 
-    });
+      myURATE.push(cityByCityuRate);
   
-    return uRate;
+    });
+
   });
-
-  newData.push({'uRate': uRate});
-
-  myJSON.map(function ( d , i ) { 
-        
-      if (d.city == d.city ) { 
-      
-        var moo = { 
-            "city": d.city,
-            'gdp': d.gdp, 
-        } 
-
-        var mob = { 
-            "city": d.city,
-            "income": d.income, 
-        } 
-
-        var cob = { 
-            "city": d.city,
-            "uRate": d.uRate, 
-        } 
-        
-        var haz = _.merge(moo,mob,cob);
-
-        lastData.push(haz);
-
-
-      } 
-  })
-      console.log(lastData);
-
-});
-
-
-
-
+  
+  var moo = _.merge(myGDP,myINCOME, myURATE);
+  console.log(moo);
+  
+};  
