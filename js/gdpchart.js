@@ -9,7 +9,7 @@ queue()
   .defer(d3.json, '/js/unemprate.json')
   .await(makeChart);
 
-function makeChart ( error, gdp, income, uRate ) {
+function makeChart ( error, gdp, income, urate ) {
   
   var cities = Object.keys(gdp[0]);
   
@@ -43,23 +43,24 @@ function makeChart ( error, gdp, income, uRate ) {
   
     });
 
-    uRate.forEach(function ( d ) {
+    urate.forEach(function ( d ) {
 
-      uRate[city] = _.zip(d.Period, d[city]);
+      urate[city] = _.zip(d.Period, d[city]);
 
-      var cityByCityuRate =  {
+      var cityByCityurate =  {
         "city": city,
         "region": "foo",
-        "uRate": uRate[city]   
+        "urate": urate[city]   
       };
 
-      myURATE.push(cityByCityuRate);
+      myURATE.push(cityByCityurate);
   
     });
 
   });
-  
-  var finalData = _.merge(myGDP,myINCOME, myURATE);
-  console.log(finalData);
-  // console.log(JSON.stringify(finalData));
+    
+    var finalData = _.merge(myGDP,myINCOME, myURATE);
+    console.log(finalData);
+    // console.log(JSON.stringify(finalData));
+
 };  
