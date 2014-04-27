@@ -43,7 +43,3 @@ text {
 #adopted {
   font-size: 0.7em;
 }
-
-#Hamilton::after {
-  fill: red;
-}
