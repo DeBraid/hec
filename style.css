@@ -5,6 +5,8 @@
   height: 506px;
 }
 
+
+
 text {
   font: 10px sans-serif;
 }
@@ -40,4 +42,8 @@ text {
 
 #adopted {
   font-size: 0.7em;
+}
+
+#Hamilton::after {
+  fill: red;
 }

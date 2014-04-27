@@ -76,6 +76,7 @@ d3.json("/js/myNations.json", function(nations) {
       .data(interpolateData(1987))
     .enter().append("circle")
       .attr("class", "dot")
+      .attr("id", function () { return this.__data__.city; })
       .style("fill", function(d) { return colorScale(color(d)); })
       .call(position)
       .sort(order);
