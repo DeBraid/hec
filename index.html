@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="accord" lang="en">
 <head>
 
   <title>HamEconSummit</title>
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
+  
+  <!-- import angular ui -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.js"></script>
+  <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
 
+  <!-- data and d3 -->
   <script src="http://d3js.org/d3.v3.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
   <script src="http://d3js.org/queue.v1.min.js"></script>
@@ -17,8 +22,26 @@
   <div class="container">  
     <h1>Wealth & Workforce of Canadian Cities</h1>
     <hr />
+
+    <div ng-controller="AccordionCtrl">
+  
+      <accordion close-others="oneAtATime">
+        <accordion-group heading="Economic Snapshot" is-open="true">
+          The largest 28 metropolitan cities in Canada are tracked from 1987 through 2018 (estimates).  Measurements for GDP, Income and Employment from Conference Board of Canada.   
+        </accordion-group>
+        <accordion-group heading="{{ group.title }}" ng-repeat="group in groups">
+          {{ group.content }}
+        </accordion-group>
+        <accordion-group is-open="isopen">
+            <accordion-heading>
+                Learn More... <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
+            </accordion-heading>
+            This is just some content.
+        </accordion-group>
+      </accordion>
+    </div>
       
-    <div id="chart-container">
+    <div id="chart-container"></div>  
 
     <p id="chart"></p>
     <aside>Mouseover the year to move forward and backwards through time.</aside>
@@ -27,9 +50,9 @@
       <p id="adopted">Visualization by <a href="http://www.cacheflow.ca" target="_blank">Derek Braid  </a>adopted from <a href="http://bost.ocks.org/mike/nations/" rel="author" target="_blank">Bostock, via Carden & Rosling</a></p>
     </footer>
 
-</div>
-
-  <script src="http://d3js.org/d3.v3.min.js"></script>
+  </div>
+  
+  <script src="/js/accord-menu.js"></script>
   <script type="text/javascript" src="/js/wealth.js"></script>
   <script type="text/javascript" src="/js/gdpchart.js"></script>
 </body>
