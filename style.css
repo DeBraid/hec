@@ -7,11 +7,18 @@
 }
 
 #accord {
-  max-width: 70%;
+  max-width: 80%;
+  margin-top: 50px;
 }
+
 
 text {
   font: 10px sans-serif;
+}
+
+#tip {
+  text-align: right;
+  margin: 20px 200px 20px 0;
 }
 
 .dot {

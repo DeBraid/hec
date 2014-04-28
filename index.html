@@ -24,8 +24,8 @@
     <hr />
     
       <div id="chart"></div>  
-      <aside>Mouseover the year to move forward and backwards through time.</aside>
 
+    <aside id="tip">Mouseover the year to move forward and backwards through time.</aside>  
 
     <div id="accord" ng-controller="AccordionCtrl">
   
@@ -33,9 +33,11 @@
         <accordion-group heading="Economic Snapshot" is-open="true">
           The largest 28 metropolitan cities in Canada are tracked from 1987 through 2018 (estimates).  Measurements for GDP, Income and Employment from Conference Board of Canada.   
         </accordion-group>
+
         <accordion-group heading="{{ group.title }}" ng-repeat="group in groups">
           {{ group.content }}
         </accordion-group>
+
         <accordion-group is-open="isopen">
             <accordion-heading>
                 Learn More... <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
@@ -54,7 +56,7 @@
 
   </div>
   
-  <script src="/js/accord-menu.js"></script>
+  <script type="text/javascript" src="/js/accord-menu.js"></script>
   <script type="text/javascript" src="/js/wealth.js"></script>
   <script type="text/javascript" src="/js/gdpchart.js"></script>
 </body>
