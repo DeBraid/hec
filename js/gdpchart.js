@@ -60,7 +60,5 @@ function makeChart ( error, gdp, income, urate ) {
   });
     
     var finalData = _.merge(myGDP,myINCOME, myURATE);
-    console.log(finalData);
-    // console.log(JSON.stringify(finalData));
 
 };  
