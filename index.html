@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="accord" lang="en">
+<html ng-app="accord">
 <head>
 
   <title>HamEconSummit</title>
@@ -22,8 +22,12 @@
   <div class="container">  
     <h1>Wealth & Workforce of Canadian Cities</h1>
     <hr />
+    
+      <div id="chart"></div>  
+      <aside>Mouseover the year to move forward and backwards through time.</aside>
 
-    <div ng-controller="AccordionCtrl">
+
+    <div id="accord" ng-controller="AccordionCtrl">
   
       <accordion close-others="oneAtATime">
         <accordion-group heading="Economic Snapshot" is-open="true">
@@ -39,12 +43,10 @@
             This is just some content.
         </accordion-group>
       </accordion>
-    </div>
-      
-    <div id="chart-container"></div>  
 
-    <p id="chart"></p>
-    <aside>Mouseover the year to move forward and backwards through time.</aside>
+    </div>
+
+    
 
     <footer>
       <p id="adopted">Visualization by <a href="http://www.cacheflow.ca" target="_blank">Derek Braid  </a>adopted from <a href="http://bost.ocks.org/mike/nations/" rel="author" target="_blank">Bostock, via Carden & Rosling</a></p>

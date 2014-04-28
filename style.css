@@ -3,9 +3,12 @@
 #chart {
   margin-left: -40px;
   height: 506px;
+  width: 100%;
 }
 
-
+#accord {
+  max-width: 70%;
+}
 
 text {
   font: 10px sans-serif;
