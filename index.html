@@ -30,11 +30,11 @@
     <div id="accord" ng-controller="AccordionCtrl">
   
       <accordion close-others="oneAtATime">
-        <accordion-group heading="Economic Snapshot" is-open="true">
-          The largest 28 metropolitan cities in Canada are tracked from 1987 through 2018 (estimates).  Measurements for GDP, Income and Employment from Conference Board of Canada.   
+        <accordion-group heading="SUMMARY" is-open="true">
+          With over 12,000 data points from the largest 28 metropolitan cities in Canada, behold the economy in motion from 1987 through 2018 (estimates).  Measurements for GDP, Income and Employment from Conference Board of Canada.   
         </accordion-group>
 
-        <accordion-group heading="{{ group.title }}" ng-repeat="group in groups">
+        <accordion-group heading="{{ group.title }}: {{ group.axis }}" ng-repeat="group in groups">
           {{ group.content }}
         </accordion-group>
 
@@ -42,7 +42,7 @@
             <accordion-heading>
                 Learn More... <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
             </accordion-heading>
-            This is just some content.
+            Email me to geek out on economics and data visualization: de.braid at gmail dot com 
         </accordion-group>
       </accordion>
 

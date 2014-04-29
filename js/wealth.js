@@ -91,9 +91,9 @@ d3.json("/js/myNations.json", function(nations) {
   var overlay = svg.append("rect")
         .attr("class", "overlay")
         .attr("x", box.x)
-        .attr("y", box.y)
+        .attr("y", box.y + 50)
         .attr("width", box.width)
-        .attr("height", box.height)
+        .attr("height", box.height - 150)
         .on("mouseover", enableInteraction);
 
   // Start a transition that interpolates the data based on year.

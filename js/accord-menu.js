@@ -5,16 +5,21 @@ function AccordionCtrl($scope) {
   $scope.groups = [
     {
       title: "GDP",
-      content: "Measure of all goods and services traded.  A broad and widely used measure of total economic activity."
+      axis: "higher values represent larger economies (y-axis)",
+      content: "Gross Domestic Product (GDP) is the total of all goods and services produced within the stated geographical boundaries. For example, GDP in Canada includes goods and services produced by Canadian and foreign-owned corporations inside Canada, but it does not include goods and services produced by Canadian corporations outside Canada.  GDP at basic prices: Equals GDP at market prices, minus taxes and subsidies on products."
     },
     {
-      title: "Income",
-      content: "Per capita income held constant in 2002 dollars."
+      title: "INCOME",
+      axis: "relatively rich on the right, poor on the left (x-axis)",
+      content: "Personal Income Per Capita: sum of all revenues (wages, dividends, self-employment, etc) received in a year, divided by total population."
     },
     {
-      title: "Employment",
+      title: "EMPLOYMENT",
+      axis: "larger circles show greater employment rates (diameter)",
       content: "The size of each circle is determined by the employment level in each city.  Large circles indicate more individuals in the workforce."
     }
   ];
 
 }
+
+
