@@ -14,6 +14,7 @@
   <script src="http://d3js.org/d3.v3.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
   <script src="http://d3js.org/queue.v1.min.js"></script>
+  <script type="text/javascript" src="/js/inputSort.js"></script>
 
 
 </head>
@@ -23,6 +24,8 @@
     <h1>Wealth & Workforce of Canadian Cities</h1>
     <hr />
     
+      <input type="text" id="searchBox" onchange="checkFilled();"/>
+
       <div id="chart"></div>  
 
     <aside id="tip">Mouseover the year to move forward and backwards through time.</aside>  

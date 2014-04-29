@@ -16,7 +16,7 @@ function AccordionCtrl($scope) {
     {
       title: "EMPLOYMENT",
       axis: "larger circles show greater employment rates (diameter)",
-      content: "The size of each circle is determined by the employment level in each city.  Large circles indicate more individuals in the workforce."
+      content: "The size of each circle is determined by the employment level in each city.  Large circles indicate more individuals in the workforce per capita."
     }
   ];
 
