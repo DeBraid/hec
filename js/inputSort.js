@@ -1,13 +1,3 @@
-// function fetchCities () {
-  
-
-//   console.log(cities);
-//   console.log('cities ^^');
-
-// };
-
-// window.onload = fetchCities();
-
 function checkFilled( cities ) {
 
   var inputVal = document.getElementById("searchBox").value;

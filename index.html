@@ -25,6 +25,17 @@
     
       <input type="text" id="searchBox" onchange="checkFilled();" placeholder="Search for a city..." />
 
+      <li class="dropdown" ng-controller="DropdownCtrl">
+        <a class="dropdown-toggle">
+          Hint!
+        </a>
+        <ul class="dropdown-menu">
+          <li ng-repeat="choice in items">
+            <a>{{ choice }}</a>
+          </li>
+        </ul>
+      </li>
+
       <div id="chart"></div>  
 
     <aside id="tip">Mouseover the year to move forward and backwards through time.</aside>  
