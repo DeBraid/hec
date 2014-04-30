@@ -23,20 +23,22 @@
     <h1>Wealth & Workforce of Canadian Cities</h1>
     <hr />
     
+    <div id="searchMenu">
       <input type="text" id="searchBox" onchange="checkFilled();" placeholder="Search for a city..." />
 
-      <li class="dropdown" ng-controller="DropdownCtrl">
+      <ul class="dropdown" ng-controller="DropdownCtrl">
         <a class="dropdown-toggle">
-          Hint!
+          List Cities
         </a>
         <ul class="dropdown-menu">
           <li ng-repeat="choice in items">
             <a>{{ choice }}</a>
           </li>
         </ul>
-      </li>
+      </ul>
+    </div>    
 
-      <div id="chart"></div>  
+    <div id="chart"></div>  
 
     <aside id="tip">Mouseover the year to move forward and backwards through time.</aside>  
 

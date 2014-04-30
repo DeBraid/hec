@@ -1,5 +1,10 @@
 @import url(../style.css?aea6f0a);
 
+#searchMenu {
+  clear: both;
+  display: block;
+}
+
 #chart {
   margin-left: -40px;
   height: 506px;

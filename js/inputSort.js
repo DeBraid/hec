@@ -1,4 +1,4 @@
-function checkFilled( cities ) {
+function checkFilled () {
 
   var inputVal = document.getElementById("searchBox").value;
   var circleId = d3.select("#" + inputVal + "");
@@ -13,11 +13,10 @@ function checkFilled( cities ) {
     cities.push(myId);
   
   });
-  // var cities = ["Hamilton", "Toronto", "Calgary"];
 
   cities.forEach(function ( city ) {
   
-      if (inputVal == null) {
+      if ( inputVal == null ) {
 
           circleId.style("fill", "white");
           
@@ -30,5 +29,3 @@ function checkFilled( cities ) {
   })
   
 }
-
-checkFilled();
