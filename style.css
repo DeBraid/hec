@@ -1,8 +1,7 @@
 @import url(../style.css?aea6f0a);
 
 #searchMenu {
-  clear: both;
-  display: block;
+  display: inline-block;
 }
 
 #chart {

@@ -25,7 +25,7 @@ function AccordionCtrl($scope) {
 
 function DropdownCtrl($scope) {
   
-  $scope.items = ["Saguenay","St. John's","Trois-Rivières","Saint John","Montreal","Vancouver","Victoria","Saskatoon","Abbotsford","Edmonton","Quebec City","Winnipeg","Calgary","Windsor","Halifax","Regina","Thunder Bay","Sherbrooke","Kingston","St. Catharines-Niagara","Oshawa","Ottawa and Gatineau","Hamilton","London","Kitchener","Toronto","Sudbury"]
+  $scope.items = ["Saguenay","St. John's","Trois-Rivieres","Saint John","Montreal","Vancouver","Victoria","Saskatoon","Abbotsford","Edmonton","Quebec City","Winnipeg","Calgary","Windsor","Halifax","Regina","Thunder Bay","Sherbrooke","Kingston","St. Catharines-Niagara","Oshawa","Ottawa and Gatineau","Hamilton","London","Kitchener","Toronto","Sudbury"]
   
 }
 
