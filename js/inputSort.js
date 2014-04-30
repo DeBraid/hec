@@ -13,6 +13,7 @@ function checkFilled () {
     cities.push(myId);
   
   });
+  
 
   cities.forEach(function ( city ) {
   
