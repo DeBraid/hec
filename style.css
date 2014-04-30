@@ -53,3 +53,7 @@ text {
 #adopted {
   font-size: 0.7em;
 }
+
+.searched {
+  fill: red;
+}

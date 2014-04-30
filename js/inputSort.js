@@ -1,14 +1,33 @@
-function checkFilled() {
+// function fetchCities () {
+  
+
+//   console.log(cities);
+//   console.log('cities ^^');
+
+// };
+
+// window.onload = fetchCities();
+
+function checkFilled( cities ) {
 
   var inputVal = document.getElementById("searchBox").value;
   var circleId = d3.select("#" + inputVal + "");
-  console.log(circleId);
-  console.log('circleId ^^');
-  var cities = ["Hamilton", "Toronto", "Calgary"];
+
+  var cities = [];
+
+
+  d3.selectAll('circle').each(function(d,i){
+    
+    var myId = d3.select(this).attr("id");
+    
+    cities.push(myId);
+  
+  });
+  // var cities = ["Hamilton", "Toronto", "Calgary"];
 
   cities.forEach(function ( city ) {
   
-      if (inputVal == "") {
+      if (inputVal == null) {
 
           circleId.style("fill", "white");
           
@@ -21,5 +40,5 @@ function checkFilled() {
   })
   
 }
- 
+
 checkFilled();
