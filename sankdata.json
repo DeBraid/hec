@@ -1,14 +1,11 @@
 {
 "links": [
-{"source":"Aluminium Non-Ferrous Metals","target":"HFCs - PFCs","value":"0.2"},
 {"source":"Chemicals","target":"HFCs - PFCs","value":"0.5"},
 {"source":"Hamilton","target":"Industry","value":"14.7"},
 {"source":"Hamilton","target":"Health Care","value":"8.6"},
 {"source":"Hamilton","target":"Education","value":"14.3"},
-{"source":"Industrial Processes","target":"Aluminium Non-Ferrous Metals","value":"0.4"},
 {"source":"Industrial Processes","target":"Cement","value":"2.8"},
 {"source":"Industrial Processes","target":"Chemicals","value":"1.4"},
-{"source":"Industry","target":"Aluminium Non-Ferrous Metals","value":"0.4"},
 {"source":"Industry","target":"Cement","value":"1.9"},
 {"source":"Industry","target":"Chemicals","value":"1.4"},
 {"source":"Industry","target":"Food and Tobacco","value":"0.5"},
@@ -37,15 +34,11 @@
 {"name":"Commercial Buildings"},
 {"name":"McMaster Innovation Park"},
 {"name":"Iron and Steel"},
-{"name":"Aluminium Non-Ferrous Metals"},
 {"name":"Pulp - Paper and Printing"},
 {"name":"Food and Tobacco"},
 {"name":"Chemicals"},
 {"name":"Cement"},
-{"name":"Coal Mining"},
 {"name":"Oil and Gas Processing"},
 {"name":"Agricultural E-Use"},
-{"name":"Rice Cultivation"},
-{"name":"Landfills"},
 {"name":"HFCs - PFCs"}
 ] }
