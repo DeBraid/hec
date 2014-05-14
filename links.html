@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+<title>SANKEY #HES2014</title>
+
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- data and d3 -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
+  <script src="http://d3js.org/queue.v1.min.js"></script>
+  <script src="http://d3js.org/d3.v3.js"></script>
+</head>
+
+<style>
+   
+  .node rect {
+    cursor: move;
+    fill-opacity: .9;
+    shape-rendering: crispEdges;
+  }
+   
+  .node text {
+    pointer-events: none;
+    text-shadow: 0 1px 0 #fff;
+  }
+   
+  .link {
+    fill: none;
+    stroke: #000;
+    stroke-opacity: .2;
+  }
+   
+  .link:hover {
+    stroke-opacity: .5;
+  }
+ 
+</style>
+
+<body>
+
+<div class="container">
+  
+  <div id="chart"></div>
+
+</div>
+
+  
+<script src="/js/d3sankey.js"></script>
+<script src="/js/citysank.js"></script>
+
+</body>
+</html>
+
