@@ -1,8 +1,8 @@
 var units = "Widgets";
  
 var margin = {top: 10, right: 10, bottom: 10, left: 10},
-    width = 1200 - margin.left - margin.right,
-    height = 740 - margin.top - margin.bottom;
+    width = 800 - margin.left - margin.right,
+    height = 340 - margin.top - margin.bottom;
  
 var formatNumber = d3.format(",.0f"),    // zero decimal places
     format = function(d) { return formatNumber(d) + " " + units; },
@@ -26,7 +26,7 @@ var path = sankey.link();
  
 // load the data
 d3.json("sankdata.json", function(error, graph) {
-  
+
     var nodeMap = {};
     graph.nodes.forEach(function(x) { nodeMap[x.name] = x; });
     graph.links = graph.links.map(function(x) {
