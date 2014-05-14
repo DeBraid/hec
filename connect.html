@@ -3,7 +3,7 @@
 <head>
 
 <script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
-<script type="text/javascript" src="https://raw.github.com/cfergus/d3-plugins/master/sankey/sankey.js"></script>
+<script type="text/javascript" src="/js/d3sankey.js"></script>
 
 <title>Sankey Diagram</title>
 <style>
@@ -129,26 +129,39 @@ function createChart( energy ) {
 };
 
 
-var energyData = {"nodes":[
-{"name":"A"},
-{"name":"B"},
-{"name":"C"},
-{"name":"D"},
-{"name":"E"},
-{"name":"F"},
-{"name":"G"},
-],
+var dataset = {
+  "nodes":[
+    {"name": "City of Hamilton"},
+    {"name": "Hamilton Community Foundation"},
+    {"name": "Port Authority"},
+    {"name": "Hamilton Health Science"},
+    {"name": "McMaster Innovation Park"},
+    {"name": "Redeemer"},
+    {"name": "McMaster"},
+    {"name": "Mohawk"},
+    {"name": "St Joseph's Healthcare"},
+    {"name": "Airport"},
+    {"name": "CHML"},
+    {"name": "Tiger Cats"}, 
+    {"name": "Hamilton"},
+    {"name": "Education"},
+    {"name": "Industry"},
+    {"name": "Health Care"}
+  ],
 "links":[
-{"source":0,"target":1,"value":2},
+{"source":0,"target":1,"value":10},
+{"source":1,"target":1,"value":10},
 {"source":1,"target":2,"value":4},
-{"source":2,"target":3,"value":30},
-{"source":2,"target":1,"value":5}, // Looper
-{"source":4,"target":2,"value":5},
+{"source":1,"target":3,"value":2},
+{"source":1,"target":2,"value":5},
+{"source":1,"target":3,"value":2},
+{"source":1,"target":2,"value":5},
+{"source":0,"target":2,"value":5},
 {"source":4,"target":5,"value":5},
 {"source":5,"target":6,"value":5}
 ]}
 
-createChart( energyData )
+createChart( dataset )
 </script>
 </body>
 </html>
