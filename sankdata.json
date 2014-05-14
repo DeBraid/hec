@@ -1,16 +1,12 @@
 {
 "links": [
-{"source":"Chemicals","target":"HFCs - PFCs","value":"0.5"},
-{"source":"Hamilton","target":"Industry","value":"14.7"},
+{"source":"Hamilton","target":"Industry","value":"10.7"},
 {"source":"Hamilton","target":"Health Care","value":"8.6"},
 {"source":"Hamilton","target":"Education","value":"14.3"},
-{"source":"Industrial Processes","target":"Cement","value":"2.8"},
-{"source":"Industrial Processes","target":"Chemicals","value":"1.4"},
 {"source":"Industry","target":"Cement","value":"1.9"},
 {"source":"Industry","target":"Chemicals","value":"1.4"},
 {"source":"Industry","target":"Food and Tobacco","value":"0.5"},
 {"source":"Industry","target":"Iron and Steel","value":"3.0"},
-{"source":"Industry","target":"Oil and Gas Processing","value":"2.8"},
 {"source":"Industry","target":"Pulp - Paper and Printing","value":"0.5"},
 {"source":"Health Care","target":"Agricultural E-Use","value":"1.0"},
 {"source":"Health Care","target":"Commercial Buildings","value":"1.3"},
@@ -24,7 +20,6 @@
 ],
 "nodes": [
 {"name":"Hamilton"},
-{"name":"Industrial Processes"},
 {"name":"Industry"},
 {"name":"Education"},
 {"name":"Health Care"},
@@ -38,7 +33,5 @@
 {"name":"Food and Tobacco"},
 {"name":"Chemicals"},
 {"name":"Cement"},
-{"name":"Oil and Gas Processing"},
-{"name":"Agricultural E-Use"},
-{"name":"HFCs - PFCs"}
+{"name":"Agricultural E-Use"}
 ] }
