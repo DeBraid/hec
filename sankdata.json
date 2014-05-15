@@ -2,7 +2,7 @@
 "links": [
 {"source":"Hamilton","target":"Industry","value":"10.7"},
 {"source":"Hamilton","target":"Health Care","value":"8.6"},
-{"source":"Hamilton","target":"Education","value":"14.3"},
+{"source":"Hamilton","target":"Education","value":"9.3"},
 {"source":"Industry","target":"Cement","value":"1.9"},
 {"source":"Industry","target":"Chemicals","value":"1.4"},
 {"source":"Industry","target":"Food and Tobacco","value":"0.5"},
@@ -23,7 +23,8 @@
 {"name":"Industry"},
 {"name":"Education"},
 {"name":"Health Care"},
-{"name":"McMaster"},{"name":"Redeemer"},
+{"name":"McMaster"},
+{"name":"Redeemer"},
 {"name":"Mohawk"},
 {"name":"Hamilton Health Science"},
 {"name":"Commercial Buildings"},
