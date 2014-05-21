@@ -1,7 +1,7 @@
 {
 "links": [
-{"source":"Hamilton","target":"Revenue","value":"100"},
-{"source":"Hamilton","target":"Employees","value":"100"},
+{"source":"Hamilton","target":"Revenue","value":"50"},
+{"source":"Hamilton","target":"Employees","value":"50"},
 {"source":"Employees","target":"Hamilton Community Foundation","value":"0.0053"},
 {"source":"Employees","target":"Port Authority","value":"0.0154"},
 {"source":"Employees","target":"Airport","value":"0.0120"},
