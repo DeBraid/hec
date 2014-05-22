@@ -66,19 +66,20 @@ text {
 
 .node rect {
   cursor: move;
-  fill-opacity: .9;
+  fill-opacity: .8;
   shape-rendering: crispEdges;
 }
- 
+
 .node text {
   pointer-events: none;
-  text-shadow: 0 1px 0 #fff;
+  text-shadow: 1px 1px 1px #fff;
+  font-size: 0.75em;
 }
  
 .link {
   fill: none;
   stroke: #000;
-  stroke-opacity: .2;
+  stroke-opacity: .1;
 }
  
 .link:hover {
