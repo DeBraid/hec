@@ -25,7 +25,7 @@ var sankey = d3.sankey()
 var path = sankey.link();
  
 // load the data
-d3.json("/js/sankdata-parts-right.json", function(error, graph) {
+d3.json("/js/newsankdata.json", function(error, graph) {
   
     var nodeMap = {};
     graph.nodes.forEach(function(x) { nodeMap[x.name] = x; });
