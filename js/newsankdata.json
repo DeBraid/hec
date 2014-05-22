@@ -19,10 +19,22 @@
 {"source":"Goods and Trade", "target": "Hamilton", "value": "33"},
 {"source":"Other Services", "target": "Hamilton", "value": "33"},
 {"source":"Hamilton Health Science", "target": "Health Care", "value": "2"},
-{"source":"St. Josephs", "target": "Health Care", "value": "2"}
+{"source":"St. Josephs", "target": "Health Care", "value": "2"},
+{"source":"City of Hamilton", "target": "Agriculture", "value": "0.01"},
+{"source":"City of Hamilton", "target": "Manufacturing", "value": "0.01"},
+{"source":"City of Hamilton", "target": "Construction", "value": "0.01"},
+{"source":"City of Hamilton", "target": "Advanced Manufacturing", "value": "0.01"},
+{"source":"City of Hamilton", "target": "Wholesale and Retail", "value": "0.01"},
+{"source":"City of Hamilton", "target": "Finance, Insurance, Real Estate", "value": "0.01"},
+{"source":"City of Hamilton", "target": "Tourism", "value": "0.01"},
+{"source":"McMaster Innovation Park", "target":"Creative and IT", "value":"0.1863"},
+{"source":"Hamilton Port Authority", "target":"Transportation and Warehousing", "value":"0.0154"},
+{"source":"Hamilton International Airport", "target":"Transportation and Warehousing", "value":"0.0120"},
+{"source":"Hamilton Community Foundation", "target":"Other Personal and Commercial Services", "value":"1"}
 ],
 "nodes": [
 {"name":"McMaster"},
+{"name":"City of Hamilton"},
 {"name":"Mohawk"},
 {"name":"Redeemer"},
 {"name":"McMaster Innovation Park"},
