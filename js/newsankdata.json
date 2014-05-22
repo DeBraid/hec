@@ -4,7 +4,7 @@
 {"source":"Mohawk", "target": "Education", "value": "0.72"},
 {"source":"Redeemer", "target": "Education", "value": "0.087"},
 {"source":"Hamilton Health Science", "target": "Health Care", "value": "3.8"},
-{"source":"St. Josephs", "target": "Health Care", "value": "1.78"},
+{"source":"St. Josephs", "target": "Health Care", "value": "4.78"},
 {"source":"Hamilton Community Foundation", "target": "Finance, Insurance, Real Estate", "value": "0.1062"},
 {"source":"McMaster Innovation Park", "target":"Creative and IT", "value":"0.1517"},
 {"source":"Hamilton Port Authority", "target":"Transportation and Warehousing", "value":"0.0758"},
@@ -27,7 +27,7 @@
 {"source":"City of Hamilton", "target": "Wholesale and Retail", "value": "0.01"},
 {"source":"City of Hamilton", "target": "Finance, Insurance, Real Estate", "value": "0.01"},
 {"source":"City of Hamilton", "target": "Tourism", "value": "0.01"},
-{"source":"Essential Services and Public Admin", "target": "Hamilton", "value": "10"},
+{"source":"Essential Services and Public Admin", "target": "Hamilton", "value": "13"},
 {"source":"Goods and Trade", "target": "Hamilton", "value": "0.23"},
 {"source":"Other Services", "target": "Hamilton", "value": "0.11"}
 ],
