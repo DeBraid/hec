@@ -2,7 +2,7 @@ var units = "Widgets";
  
 var margin = {top: 30, right: 30, bottom: 30, left: 30},
     width = 1200 - margin.left - margin.right,
-    height = 740 - margin.top - margin.bottom;
+    height = 540 - margin.top - margin.bottom;
  
 var formatNumber = d3.format(",.0f"),    // zero decimal places
     format = function(d) { return formatNumber(d) + " " + units; },
