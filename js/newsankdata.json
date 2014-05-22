@@ -27,9 +27,12 @@
 {"source":"City of Hamilton", "target": "Wholesale and Retail", "value": "0.01"},
 {"source":"City of Hamilton", "target": "Finance, Insurance, Real Estate", "value": "0.01"},
 {"source":"City of Hamilton", "target": "Tourism", "value": "0.01"},
-{"source":"Essential Services and Public Admin", "target": "Hamilton", "value": "13"},
-{"source":"Goods and Trade", "target": "Hamilton", "value": "0.23"},
-{"source":"Other Services", "target": "Hamilton", "value": "0.11"}
+{"source":"Essential Services and Public Admin", "target": "Combined Revenue", "value": "13"},
+{"source":"Goods and Trade", "target": "Combined Revenue", "value": "0.23"},
+{"source":"Other Services", "target": "Combined Revenue", "value": "0.11"},
+{"source":"Essential Services and Public Admin", "target": "Hamilton", "value": "20"},
+{"source":"Goods and Trade", "target": "Hamilton", "value": "30"},
+{"source":"Other Services", "target": "Hamilton", "value": "35"}
 ],
 "nodes": [
 {"name":"McMaster"},
@@ -56,5 +59,6 @@
 {"name":"Essential Services and Public Admin"},
 {"name":"Goods and Trade"},
 {"name":"Other Services"},
-{"name":"Hamilton"}
+{"name":"Hamilton"},
+{"name":"Combined Revenue"}
 ] }
