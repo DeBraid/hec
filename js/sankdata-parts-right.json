@@ -1,5 +1,7 @@
 {
 "links": [
+{"source":"Hamilton","target":"Goods","value":"33"},
+{"source":"Hamilton","target":"Services","value":"66"},
 {"source":"Hamilton","target":"Revenue","value":"50"},
 {"source":"Hamilton","target":"Employees","value":"50"},
 {"source":"Employees","target":"Hamilton Community Foundation","value":"0.0053"},
@@ -21,10 +23,21 @@
 {"source":"Revenue","target":"Mohawk","value":"0.7227"},
 {"source":"Revenue","target":"St. Josephs","value":"1.7820"},
 {"source":"Revenue","target":"Joseph Brant","value":"1.0"},
-{"source":"Revenue","target":"Hamilton Health Science","value":"3.79"}
+{"source":"Revenue","target":"Hamilton Health Science","value":"3.79"},
+{"source":"Services","target":"IT and Arts", "value":"3"},
+{"source":"Services","target":"Business Services", "value":"7.7"},
+{"source":"Goods","target":"Wholesale and Retail", "value":"13.2"},
+{"source":"Services","target":"Transportation and Warehousing", "value":"3.3"},
+{"source":"Goods","target":"Construction", "value":"7.5"},
+{"source":"Goods","target":"Manufacturing", "value":"15.8"},
+{"source":"Services","target":"General Services and Public Admin", "value":"26.1"},
+{"source":"Goods","target":"Primary and Utilities", "value":"2.2"},
+{"source":"Services","target":"Finance, Insurance, Real Estate", "value":"21.4"}
 ],
 "nodes": [
 {"name":"Hamilton"},
+{"name":"Goods"},
+{"name":"Services"},
 {"name":"Redeemer"},
 {"name":"Mohawk"},
 {"name":"Employees"},
@@ -36,5 +49,14 @@
 {"name":"Hamilton Health Science"},
 {"name":"St. Josephs"},
 {"name":"Joseph Brant"},
-{"name":"McMaster Innovation Park"}
+{"name":"McMaster Innovation Park"},
+{"name":"IT and Arts"},
+{"name":"Finance, Insurance, Real Estate"},
+{"name":"Business Services"},
+{"name":"Wholesale and Retail"},
+{"name":"Transportation and Warehousing"},
+{"name":"Construction"},
+{"name":"Manufacturing"},
+{"name":"General Services and Public Admin"},
+{"name":"Primary and Utilities"}
 ] }
