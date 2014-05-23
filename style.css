@@ -85,3 +85,7 @@ text {
 .link:hover {
   stroke-opacity: .5;
 }
+
+.panel-title:hover  { 
+  cursor: pointer; 
+} 

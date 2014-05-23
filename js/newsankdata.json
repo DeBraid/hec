@@ -27,9 +27,9 @@
 {"source":"City of Hamilton", "target": "Wholesale and Retail", "value": "0.01"},
 {"source":"City of Hamilton", "target": "Finance, Insurance, Real Estate", "value": "0.01"},
 {"source":"City of Hamilton", "target": "Tourism", "value": "0.01"},
-{"source":"Essential Services and Public Admin", "target": "Combined Revenue", "value": "13"},
-{"source":"Goods and Trade", "target": "Combined Revenue", "value": "0.23"},
-{"source":"Other Services", "target": "Combined Revenue", "value": "0.11"}
+{"source":"Essential Services and Public Admin", "target": "Combined #HES2014 Participant Revenue", "value": "13"},
+{"source":"Goods and Trade", "target": "Combined #HES2014 Participant Revenue", "value": "0.23"},
+{"source":"Other Services", "target": "Combined #HES2014 Participant Revenue", "value": "0.11"}
 ],
 "nodes": [
 {"name":"McMaster"},
@@ -56,5 +56,5 @@
 {"name":"Essential Services and Public Admin"},
 {"name":"Goods and Trade"},
 {"name":"Other Services"},
-{"name":"Combined Revenue"}
+{"name":"Combined #HES2014 Participant Revenue"}
 ] }

@@ -1,6 +1,6 @@
 var units = "Widgets";
  
-var margin = {top: 30, right: 30, bottom: 30, left: 30},
+var margin = {top: 30, right: 30, bottom: 50, left: 30},
     width = 1200 - margin.left - margin.right,
     height = 540 - margin.top - margin.bottom;
  
@@ -68,7 +68,9 @@ d3.json("/js/newsankdata.json", function(error, graph) {
     .enter().append("g")
       .attr("class", "node")
       .attr("transform", function(d) { 
-      return "translate(" + d.x + "," + d.y + ")"; })
+        return "translate(" + d.x + "," + d.y + ")"; 
+      })
+      .on("click", highlight_node_links)
     .call(d3.behavior.drag()
       .origin(function(d) { return d; })
       .on("dragstart", function() { 
