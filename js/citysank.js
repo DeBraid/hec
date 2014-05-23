@@ -50,7 +50,6 @@ d3.json("/js/newsankdata.json", function(error, graph) {
       .attr("d", path)
       .attr("id", function(d,i){
         d.id = i;
-        console.log(i);
         return "link-"+i;
       })
       .style("stroke-width", function(d) { return Math.max(1, d.dy); })
