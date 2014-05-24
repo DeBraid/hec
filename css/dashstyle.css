@@ -1,19 +1,6 @@
-/*@font-face{
-font-family: "ProximaNovaCondReg";
-src: url("chartfont/ProximaNovaCondReg.otf")
+text {
+    font-size: 10px;fill: rgb(89,89,89);
 }
-@font-face{
-font-family: "ProximaNovaCondBold";
-src: url("chartfont/ProximaNovaCondBold.otf")
-}
-@font-face{
-font-family: "ProximaNovaCondSBold";
-src: url("chartfont/ProximaNovaCondSbold.otf")
-}
-
-body{font-family: "ProximaNovaCondReg","Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;}
-*/
-text {font-size: 10px;fill: rgb(89,89,89);}
 
 #buffer{
 margin: 11px;
@@ -33,8 +20,6 @@ font-family: "ProximaNovaCondSbold","Franklin Gothic Medium", "Franklin Gothic",
 font-size: 20px;
 fill: rgb(89,89,89);
 }
-
-svg{position: absolute;top: 44px;background: rgb(245,245,245);}
 
 #counts {
     position:absolute;

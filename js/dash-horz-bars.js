@@ -65,7 +65,7 @@ barsContainer.selectAll("rect").data(sortedData).enter().append("rect")
   .attr('height', yScale.rangeBand() - 9)
   .attr('width', function(d) { return x(barValue(d)); })
   .attr('stroke', 'white')
-  .attr('fill', 'steelblue');
+  .attr('fill', '#00AE9D');
 
 // bar value labels
 barsContainer.selectAll("text").data(sortedData).enter().append("text")
@@ -84,8 +84,7 @@ barsContainer.append("line")
   .attr("y1", -gridChartOffset)
   .attr("y2", yScale.rangeExtent()[1] + gridChartOffset)
   .style("stroke", "#000");
-
-  }
+}
 
 
   renderChart();
