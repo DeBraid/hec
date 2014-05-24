@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Dashboard #HES2014</title>
+  <title>Dashboard #HES2014</title>
 
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/dashstyle.css">
@@ -27,27 +27,44 @@
     
 <body>
     
-<!--Div that holds input field and button--> 
-<div>
-<span id="titletext">Appearances per 10,000 Words:</span> 
+<div class="horz-bar-chart-container">
+
+  <div id="horz-bar-chart">
+    <!-- d3 chart -->
+  </div>
+
+  
 </div>
+
+<div class="deadspin-chart">
+    <!--Div that holds input field and button--> 
+    <div>
+      <span id="titletext">Appearances per 10,000 Words:</span> 
+    </div>
+        
+    <div>
+      <span id="introtext">Enter your word:</span>
+    </div>
     
-<div><span id="introtext">Enter your word:</span></div>
-<div id="calculator">
-    <form>
+    <div id="calculator">
+      <form>
         <input type="text" name="inputbox" id="word input" value="natural" onClick="record(this.form)">
         <p id="buffer"></p>
         <button type="button" onClick="record(this.form)">Select</button>
-    </form> 
-</div>
+      </form> 
+    </div>
 
-<!--Div that holds counts--> 
-<div id="counts">
-    <p id="usetitle">Total number of uses:</p>
-    <p><span id="whitecount">*</span> use(s) for white players</p>
-    <p><span id="blackcount">*</span> use(s) for black players</p> 
+    <!--Div that holds counts--> 
+    <div id="counts">
+      <p id="usetitle">Total number of uses:</p>
+      <p><span id="whitecount">*</span> use(s) for white players</p>
+      <p><span id="blackcount">*</span> use(s) for black players</p> 
+    </div>
+
 </div>
 
 <script src="/js/dash.js"></script>
+<script src="/js/dash-horz-bars.js"></script>
 </body>
 </html>
+
