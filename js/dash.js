@@ -96,8 +96,8 @@ svg.append("text")
         .style("text-anchor", "middle")
         .text("Black Players");
     
-d3.csv("blackcount.csv", function(data) {black = data;});
-d3.csv("whitecount.csv", function(data) {white = data;})
+d3.csv("/csv/gdpbySectorAll-clean.csv", function(data) {black = data;});
+d3.csv("/csv/gdpbySectorAll-clean.csv", function(data) {white = data;})
 
 //function from form
 

@@ -2,7 +2,7 @@ var labels = [],
     figures = [];
 
 queue()
-  .defer(d3.csv, 'gdpBySectorAll-clean.csv')
+  .defer(d3.csv, '/csv/gdpBySectorAll-clean.csv')
   .await(makeChart);
 
 function makeChart ( error, data ) {
