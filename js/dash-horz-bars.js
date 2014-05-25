@@ -1,4 +1,4 @@
-d3.csv('/csv/diversity.csv', function (errror, data) {
+d3.csv('/csv/diversity.csv', function (error, data) {
   
   function renderChart() {
     
