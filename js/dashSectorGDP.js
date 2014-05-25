@@ -6,14 +6,10 @@ queue()
   .await(makeChart);
 
 function makeChart ( error, data ) {
-  
 
-  console.log(data);
-  console.log('data ***');
-    
   var valueLabelWidth = 40; // space reserved for value labels (right)
   var barHeight = 36; // height of one bar
-  var barLabelWidth = 400; // space reserved for bar labels
+  var barLabelWidth = 300; // space reserved for bar labels
   var barLabelPadding = 5; // padding between bar and bar labels (left)
   var gridLabelHeight = 18; // space reserved for gridline labels
   var gridChartOffset = 10; // space between start of grid and first bar
@@ -28,11 +24,25 @@ function makeChart ( error, data ) {
    return d3.descending(barValue(a), barValue(b));
   }); 
 
+  console.log(sortedData);
+  console.log('sortedData ** ');
+
+  sortedData.map(function (d,i) {
+
+    if (_.contains([1,2,3], 2)) {
+
+      alert('got ONE!')
+    
+    }
+
+  });
+
   // scales
   var yScale = d3.scale.ordinal().domain(d3.range(0, sortedData.length)).rangeBands([0, sortedData.length * barHeight]);
   var y = function(d, i) { return yScale(i); };
   var yText = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
   var x = d3.scale.linear().domain([0, d3.max(sortedData, barValue)]).range([0, maxBarWidth]);
+  
   // svg container element
   var chart = d3.select('#horz-bar-chart').append("svg")
     .attr('width', maxBarWidth + barLabelWidth + valueLabelWidth)
