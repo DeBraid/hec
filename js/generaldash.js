@@ -1,8 +1,8 @@
-var n = 5, // number of layers
-    m = 2; // number of samples per layer
+var n = 2, // number of layers
+    m = 9; // number of samples per layer
 
 var margin = {top: 20, right: 50, bottom: 100, left: 75},
-    width = 440 - margin.left - margin.right,
+    width = 640 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
 var svggeneral = d3.select("#general-stacked").append("svg")
@@ -14,7 +14,7 @@ var svggeneral = d3.select("#general-stacked").append("svg")
 
 d3.csv("/csv/generaldash.csv", function (data){
 
-    var headers = ["Employees","ratioJobs","Share of Jobs in Hamilton","Revenue","Revenue Per Employee","Revenue Relative to GDP","Share of Revenue Relative to GDP"];
+    var headers = ["Employees","Revenue Per Employee"];
 
 
     var layers = d3.layout.stack()(headers.map(function(priceRange) {
@@ -31,12 +31,12 @@ d3.csv("/csv/generaldash.csv", function (data){
         .rangeRoundBands([25, width], .08);
 
     var y = d3.scale.linear()
-        .domain([0, yStackMax])
+        .domain([0, yGroupMax])
         .range([height, 0]);
 
     var color = d3.scale.ordinal()
         .domain(headers)
-        .range(["#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c"]);
+        .range(["#6b486b", "#a05d56"]);
 
     var xAxis = d3.svg.axis()
         .scale(xScale)
@@ -49,7 +49,7 @@ d3.csv("/csv/generaldash.csv", function (data){
         .orient("left")
         .tickFormat(d3.format(".2s"));
 
-    var layer = svggeneral.selectAll(".layer")
+    var layer = svggeneral.selectAll(".layer-gen")
         .data(layers)
         .enter().append("g")
         .attr("class", "layer")
@@ -58,10 +58,11 @@ d3.csv("/csv/generaldash.csv", function (data){
     var rect = layer.selectAll("rect")
         .data(function(d) { return d; })
         .enter().append("rect")
-        .attr("x", function(d) { return xScale(d.x); })
-        .attr("y", function(d) { return y(d.y0 + d.y); })
-        .attr("width", xScale.rangeBand())
-        .attr("height", function(d) { return y(d.y0) - y(d.y0 + d.y); });
+        .attr("x", function(d, i, j) { return xScale(d.x) + xScale.rangeBand() / n * j; })
+        .attr("width", xScale.rangeBand() / n)
+        .attr("y", function(d) { return y(d.y); })
+        .attr("height", function(d) { return height - y(d.y); });
+        
 
     //********** AXES ************
     svggeneral.append("g")
@@ -69,10 +70,10 @@ d3.csv("/csv/generaldash.csv", function (data){
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis)
         .selectAll("text").style("text-anchor", "end")
-            .attr("dx", "5em")
+            .attr("dx", "0em")
             .attr("dy", "1.35em")
             .attr("transform", function(d) {
-                  return "rotate(0)"
+                  return "rotate(-45)"
                 });
 
     svggeneral.append("g")
@@ -86,8 +87,8 @@ d3.csv("/csv/generaldash.csv", function (data){
         .style("text-anchor", "end")
         .text("Patient Activity");
 
-    var legend = svggeneral.selectAll(".legend")
-        .data(headers.slice())
+    var legend = svggeneral.selectAll(".legend-gen")
+        .data(headers.reverse().slice())
             .enter().append("g")
             .attr("class", "legend")
             .attr("transform", function(d, i) { return "translate(-20," + i * 20 + ")"; });
@@ -105,22 +106,5 @@ d3.csv("/csv/generaldash.csv", function (data){
               .style("text-anchor", "end")
               .text(function(d) { return d; });
 
-
-   function transitionGrouped() {
-      y.domain([0, yGroupMax]);
-
-      rect.transition()
-          .duration(1500)
-          .delay(function(d, i) { return i * 10; })
-          .attr("x", function(d, i, j) { return xScale(d.x) + xScale.rangeBand() / n * j; })
-          .attr("width", xScale.rangeBand() / n)
-        .transition()
-          .attr("y", function(d) { return y(d.y); })
-          .attr("height", function(d) { return height - y(d.y); });
-
-    };
-
-
-    transitionGrouped();
 
 });
