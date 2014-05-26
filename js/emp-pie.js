@@ -1,4 +1,4 @@
-var width = 660,
+var width = 560,
     height = 400,
     radius = Math.min(width, height) / 2;
 
