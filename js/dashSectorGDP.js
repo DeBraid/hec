@@ -1,24 +1,25 @@
+var valueLabelWidth = 40; // space reserved for value labels (right)
+    barHeight = 36, // height of one bar
+    barLabelWidth = 200, // space reserved for bar labels
+    barLabelPadding = 5, // padding between bar and bar labels (left)
+    gridLabelHeight = 18, // space reserved for gridline labels
+    gridChartOffset = 10, // space between start of grid and first bar
+    maxBarWidth = 480, // width of the bar with the max value
+    barnumber = 10,
+    page = 1,
+    _next = document.getElementById('next'),
+    _last = document.getElementById('last');
+    
+// accessor functions 
+var barLabel = function(d) { return d['type']; };
+var barValue = function(d) { return parseFloat(+d['gdp']); };
+ 
 queue()
   .defer(d3.csv, '/csv/gdpBySectorAll-clean.csv')
-  .await(makeChart);
+  .await(initChart);
 
-function makeChart ( error, data ) {
+function initChart ( error, data ) {
 
-  var valueLabelWidth = 40; // space reserved for value labels (right)
-  var barHeight = 36; // height of one bar
-  var barLabelWidth = 200; // space reserved for bar labels
-  var barLabelPadding = 5; // padding between bar and bar labels (left)
-  var gridLabelHeight = 18; // space reserved for gridline labels
-  var gridChartOffset = 10; // space between start of grid and first bar
-  var maxBarWidth = 480; // width of the bar with the max value
-  var barnumber = 10;
-  var page = 1;
-  var _next = document.getElementById('next');
-  var _last = document.getElementById('last');
-  // accessor functions 
-  var barLabel = function(d) { return d['type']; };
-  var barValue = function(d) { return parseFloat(+d['gdp']); };
-   
   // sorting
   var sortedData = data.sort(function(a, b) {
    return d3.descending(barValue(a), barValue(b));
@@ -104,31 +105,36 @@ function makeChart ( error, data ) {
 
   _next.onclick = function() {
     page++;
-    viewdata = data.slice((page-1)*barnumber,page*barnumber);
+    viewdata = sortedData.slice((page-1)*barnumber,page*barnumber);
     redraw();
   };
 
 
   _last.onclick = function() {
       page--;
-      viewdata = data.slice((page-1)*barnumber,page*barnumber);
+      viewdata = sortedData.slice((page-1)*barnumber,page*barnumber);
       redraw();
   };
-  
+
   function redraw () {
   
-  /* Draw code begins */
-  console.log('redraw * init *');
+    /* Draw code begins */
+    console.log('redraw * init *');
+    console.log(viewdata);
+    console.log(viewdata.length);
 
     // scales
     var yScale = d3.scale.ordinal()
         .domain(d3.range(0, viewdata.length))
         .rangeBands([0, viewdata.length * barHeight]);
 
+        console.log(yScale);
+    console.log('yScale ** ');
 
     var y = function(d, i) { return yScale(i); };
         console.log('redraw * yScale *');
     var yText = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
+
     var x = d3.scale.linear()
         .domain([0, d3.max(viewdata, barValue)])
         .range([0, maxBarWidth]);
@@ -141,16 +147,21 @@ function makeChart ( error, data ) {
       .attr('transform', 'translate(' + barLabelWidth + ',' + gridLabelHeight + ')'); 
 
     gridContainer.selectAll("text")
-      .data(x.ticks(10)).transition().duration(500)
+      .data(x.ticks(10))
+      .transition()
+      .duration(500)
       .attr("x", x)
       .attr("dy", -3)
       .attr("text-anchor", "middle")
       .text(String);
+
         console.log('redraw * gridContainer *');
 
     // vertical grid lines
     gridContainer.selectAll("line")
-      .data(x.ticks(10)).transition().duration(500)
+      .data(x.ticks(10))
+      .transition()
+      .duration(500)
       .attr("x1", x)
       .attr("x2", x)
       .attr("y1", 0)
@@ -166,7 +177,9 @@ function makeChart ( error, data ) {
         console.log('redraw * labelContainer *');
     
     labelsContainer.selectAll('text')
-      .data(viewdata).transition().duration(500)
+      .data(viewdata)
+      .transition()
+      .duration(500)
       .attr('y', yText)
       .attr('stroke', 'none')
       .attr('fill', 'black')
@@ -182,7 +195,9 @@ function makeChart ( error, data ) {
       .attr('transform', 'translate(' + barLabelWidth + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
 
     barsContainer.selectAll("rect")
-      .data(viewdata).transition().duration(500)
+      .data(viewdata)
+      .transition()
+      .duration(500)
       .attr('y', y)
       .attr('height', yScale.rangeBand() - 9)
       .attr('width', function ( d ) { return x(barValue(d)); })
@@ -192,7 +207,9 @@ function makeChart ( error, data ) {
 
     // bar value labels
     barsContainer.selectAll("text")
-      .data(viewdata).transition().duration(500)
+      .data(viewdata)
+      .transition()
+      .duration(500)
       .attr("x", function(d) { return x(barValue(d)); })
       .attr("y", yText)
       .attr("dx", 3) // padding-left
