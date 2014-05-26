@@ -6,12 +6,12 @@ function makeChart ( error, data ) {
 
   var valueLabelWidth = 40; // space reserved for value labels (right)
   var barHeight = 36; // height of one bar
-  var barLabelWidth = 300; // space reserved for bar labels
+  var barLabelWidth = 200; // space reserved for bar labels
   var barLabelPadding = 5; // padding between bar and bar labels (left)
   var gridLabelHeight = 18; // space reserved for gridline labels
   var gridChartOffset = 10; // space between start of grid and first bar
-  var maxBarWidth = 420; // width of the bar with the max value
-  var barnumber = 20;
+  var maxBarWidth = 480; // width of the bar with the max value
+  var barnumber = 10;
   var page = 1;
   // accessor functions 
   var barLabel = function(d) { return d['type']; };
@@ -30,7 +30,7 @@ function makeChart ( error, data ) {
   var x = d3.scale.linear().domain([0, d3.max(viewdata, barValue)]).range([0, maxBarWidth]);
   
   // svg container element
-  var chart = d3.select('#horz-bar-chart').append("svg")
+  var chart = d3.select('#mega-chart').append("svg")
     .attr('width', maxBarWidth + barLabelWidth + valueLabelWidth)
     .attr('height', gridLabelHeight + gridChartOffset + viewdata.length * barHeight);
 
@@ -59,7 +59,8 @@ function makeChart ( error, data ) {
   var labelsContainer = chart.append('g')
     .attr('transform', 'translate(' + (barLabelWidth - barLabelPadding) + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
   
-  labelsContainer.selectAll('text').data(viewdata).enter().append('text')
+  labelsContainer.selectAll('text')
+    .data(viewdata).enter().append('text')
     .attr('y', yText)
     .attr('stroke', 'none')
     .attr('fill', 'black')
