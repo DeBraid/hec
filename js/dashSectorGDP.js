@@ -12,43 +12,54 @@ var valueLabelWidth = 40; // space reserved for value labels (right)
 
     var w = 400, h = 400;
 
+
 // accessor functions 
 var barLabel = function(d) { return d['type']; };
 var barValue = function(d) { return parseFloat(+d['gdp']); };
  
 queue()
   .defer(d3.csv, '/csv/gdpBySectorAll-clean.csv')
-  .await(bars);
+  .await(sortData);
 
-function bars (error, data) {
+function sortData ( error, data ) {
 
   // sorting
   var sortedData = data.sort(function(a, b) {
    return d3.descending(barValue(a), barValue(b));
   }); 
-
+  
   var viewdata = sortedData.slice((page-1)*barnumber,page*barnumber);
 
+  bars(viewdata);
+
+}
+
+
+function bars ( data ) {
+
+
+    // svg container element
+  var chart = d3.select('#mega-chart').append("svg")
+    .attr('width', maxBarWidth + barLabelWidth + valueLabelWidth)
+    .attr('height', gridLabelHeight + gridChartOffset + 10 * barHeight); 
   // scales
-  var yScale = d3.scale.ordinal().domain(d3.range(0, viewdata.length)).rangeBands([0, viewdata.length * barHeight]);
+  var yScale = d3.scale.ordinal().domain(d3.range(0, data.length)).rangeBands([0, data.length * barHeight]);
   var y = function(d, i) { return yScale(i); };
   var yText = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
-  var x = d3.scale.linear().domain([0, d3.max(viewdata, barValue)]).range([0, maxBarWidth]);
+  var x = d3.scale.linear().domain([0, d3.max(data, barValue)]).range([0, maxBarWidth]);
   
 
-  console.log(viewdata);
-  console.log('viewdata *** ');
-    
-  var chart = d3.select("#mega-chart").append('svg');
+  console.log(data);
+  console.log('data *** ');
     
   // var bars = vis.selectAll("rect.bar")
-  //     .data(viewdata)
+  //     .data(data)
 
   var barsContainer = chart.append('g')
     .attr('transform', 'translate(' + barLabelWidth + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
 
   var bars = barsContainer.selectAll("rect")
-      .data(viewdata);
+      .data(data);
 
   // update
   bars.attr('stroke', 'white')
@@ -68,7 +79,7 @@ function bars (error, data) {
         .remove();
 
   bars.transition()
-    .duration(300)
+    .duration(500)
     .ease("quad")
       .attr('y', y)
       .attr('height', yScale.rangeBand() - 9)
@@ -76,37 +87,6 @@ function bars (error, data) {
       .attr('stroke', 'white')
       .attr('fill','#00AE9D');
 
-}
-
-
-function init()
-{
-
-    //setup the svg
-    var chart = d3.select("#mega-chart")
-        .attr("width", w+100)
-        .attr("height", h+100)
-
-    chart.append("svg:rect")
-        .attr("width", "100%")
-        .attr("height", "100%")
-        .attr("stroke", "#000")
-        .attr("fill", "none")
-
-    chart.append("svg:g")
-        .attr("id", "barchart")
-        .attr("transform", "translate(50,50)")
-    
-    // //setup our ui
-    // d3.select("#next")
-    //     .on("click", function(d,i) {
-    //         bars(viewdata)
-    //     })  
-         
-    // d3.select("#last")
-    //     .on("click", function(d,i) {
-    //         bars(data)
-    //     })   
 
   _next.onclick = function() {
     page++;
@@ -124,7 +104,40 @@ function init()
   };
 
 
-
-    //make the bars
-    bars(viewdata)
 }
+
+
+function init()
+{
+
+    //setup the svg
+    // var chart = d3.select("#mega-chart").append("svg")
+    //     .attr("width", w+100)
+    //     .attr("height", h+100);
+
+    // chart.append("svg:rect")
+    //     .attr("width", "100%")
+    //     .attr("height", "100%")
+    //     .attr("stroke", "#000")
+    //     .attr("fill", "none");
+
+    // chart.append("svg:g")
+    //     .attr("id", "barchart")
+    //     .attr("transform", "translate(50,50)")
+    
+    // //setup our ui
+    // d3.select("#next")
+    //     .on("click", function(d,i) {
+    //         bars(viewdata)
+    //     })  
+         
+    // d3.select("#last")
+    //     .on("click", function(d,i) {
+    //         bars(data)
+    //     })   
+
+
+
+}
+
+init();
