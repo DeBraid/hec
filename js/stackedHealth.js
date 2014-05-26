@@ -5,7 +5,7 @@ var margin = {top: 20, right: 50, bottom: 100, left: 75},
     width = 440 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
-var svg = d3.select("#health-stacked").append("svg")
+var svgHealth = d3.select("#health-stacked").append("svg")
     .attr("id", "stacked-health-svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -50,7 +50,7 @@ console.log(headers);
         .orient("left")
         .tickFormat(d3.format(".2s"));
 
-    var layer = svg.selectAll(".layer")
+    var layer = svgHealth.selectAll(".layer")
         .data(layers)
         .enter().append("g")
         .attr("class", "layer")
@@ -65,7 +65,7 @@ console.log(headers);
         .attr("height", function(d) { return y(d.y0) - y(d.y0 + d.y); });
 
     //********** AXES ************
-    svg.append("g")
+    svgHealth.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis)
@@ -76,7 +76,7 @@ console.log(headers);
                   return "rotate(0)"
                 });
 
-    svg.append("g")
+    svgHealth.append("g")
         .attr("class", "y axis")
         .attr("transform", "translate(20,0)")
         .call(yAxis)
@@ -87,7 +87,7 @@ console.log(headers);
         .style("text-anchor", "end")
         .text("Patient Activity");
 
-    var legend = svg.selectAll(".legend")
+    var legend = svgHealth.selectAll(".legend")
         .data(headers.slice())
             .enter().append("g")
             .attr("class", "legend")
