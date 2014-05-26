@@ -28,8 +28,11 @@ function makeChart ( error, data ) {
   console.log('sortedData ** ');
 
   sortedData.map(function (d,i) {
+    var label = d.type;
+    var strlab = label.toString();
+    console.log(strlab);
 
-    if (_.contains([1,2,3], 2)) {
+    if (strlab.indexOf('Canada')) {
 
       alert('got ONE!')
     
