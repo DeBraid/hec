@@ -10,231 +10,121 @@ var valueLabelWidth = 40; // space reserved for value labels (right)
     _next = document.getElementById('next'),
     _last = document.getElementById('last');
 
+    var w = 400, h = 400;
+
 // accessor functions 
 var barLabel = function(d) { return d['type']; };
 var barValue = function(d) { return parseFloat(+d['gdp']); };
  
 queue()
   .defer(d3.csv, '/csv/gdpBySectorAll-clean.csv')
-  .await(initChart);
+  .await(bars);
 
-function initChart ( error, data ) {
+function bars (error, data) {
 
   // sorting
   var sortedData = data.sort(function(a, b) {
    return d3.descending(barValue(a), barValue(b));
   }); 
+
   var viewdata = sortedData.slice((page-1)*barnumber,page*barnumber);
 
-  // svg container element
-  var chart = d3.select('#mega-chart').append("svg")
-    .attr('width', maxBarWidth + barLabelWidth + valueLabelWidth)
-    .attr('height', gridLabelHeight + gridChartOffset + viewdata.length * barHeight); 
-
- // scales
+  // scales
   var yScale = d3.scale.ordinal().domain(d3.range(0, viewdata.length)).rangeBands([0, viewdata.length * barHeight]);
   var y = function(d, i) { return yScale(i); };
   var yText = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
   var x = d3.scale.linear().domain([0, d3.max(viewdata, barValue)]).range([0, maxBarWidth]);
   
 
-  // grid line labels
-  var gridContainer = chart.append('g')
-    .attr('transform', 'translate(' + barLabelWidth + ',' + gridLabelHeight + ')'); 
+  console.log(viewdata);
+  console.log('viewdata *** ');
+    
+  var chart = d3.select("#mega-chart").append('svg');
+    
+  // var bars = vis.selectAll("rect.bar")
+  //     .data(viewdata)
 
-  gridContainer.selectAll("text")
-    .data(x.ticks(10)).enter().append("text")
-    .attr("x", x)
-    .attr("dy", -3)
-    .attr("text-anchor", "middle")
-    .text(String);
-
-  // vertical grid lines
-  gridContainer.selectAll("line")
-    .data(x.ticks(10)).enter().append("line")
-    .attr("x1", x)
-    .attr("x2", x)
-    .attr("y1", 0)
-    .attr("y2", yScale.rangeExtent()[1] + gridChartOffset)
-    .style("stroke", "#ccc");
-
-  // bar labels
-  var labelsContainer = chart.append('g')
-    .attr('transform', 'translate(' + (barLabelWidth - barLabelPadding) + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
-  
-  labelsContainer.selectAll('text')
-    .data(viewdata).enter().append('text')
-    .attr('y', yText)
-    .attr('stroke', 'none')
-    .attr('fill', 'black')
-    .attr("dy", ".35em") // vertical-align: middle
-    .attr('text-anchor', 'end')
-    .text(barLabel);
-
-  // bars
   var barsContainer = chart.append('g')
     .attr('transform', 'translate(' + barLabelWidth + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
 
-  barsContainer.selectAll("rect")
-    .data(viewdata).enter().append("rect")
-    .attr('y', y)
-    .attr('height', yScale.rangeBand() - 9)
-    .attr('width', function ( d ) { return x(barValue(d)); })
-    .attr('stroke', 'white')
-    .attr("id", function ( d,i ) { return barLabel(d); })
-    .attr('fill','#00AE9D');
+  var bars = barsContainer.selectAll("rect")
+      .data(viewdata);
 
-  // bar value labels
-  barsContainer.selectAll("text")
-    .data(viewdata).enter().append("text")
-    .attr("x", function(d) { return x(barValue(d)); })
-    .attr("y", yText)
-    .attr("dx", 3) // padding-left
-    .attr("dy", ".05em") // vertical-align: middle
-    .attr("text-anchor", "start") // text-align: right
-    .attr("fill", "black")
-    .attr("font-size", "15")
-    .attr("stroke", "none")
-    .text(function(d) { return d3.round(barValue(d), 2); });
+  // update
+  bars.attr('stroke', 'white')
+      .attr('fill','#00AE9D');    
 
-  // start line
-  barsContainer.append("line")
-    .attr("y1", -gridChartOffset)
-    .attr("y2", yScale.rangeExtent()[1] + gridChartOffset)
-    .style("stroke", "#000");
+  //enter
+  bars.enter().append("rect")
+      .attr('stroke', 'white')
+      .attr('fill','#00AE9D')
+      .attr("id", function ( d,i ) { return barLabel(d); });
 
-  _next.onclick = function() {
-    page++;
-    viewdata = sortedData.slice((page-1)*barnumber,page*barnumber);
-    redraw();
-  };
+  bars.exit()
+    .transition()
+    .duration(300)
+    .ease("exp")
+        .attr("width", 0)
+        .remove();
 
-
-  _last.onclick = function() {
-      page--;
-      viewdata = sortedData.slice((page-1)*barnumber,page*barnumber);
-      redraw();
-  };
-
-  function redraw () {
-  
-    /* Draw code begins */
-    console.log('redraw * init *');
-    console.log(viewdata);
-    console.log(viewdata.length);
-
-    // scales
-    var yScale = d3.scale.ordinal()
-        .domain(d3.range(0, viewdata.length))
-        .rangeBands([0, viewdata.length * barHeight]);
-
-        console.log(yScale);
-    console.log('yScale ** ');
-
-    var y = function(d, i) { return yScale(i); };
-        console.log('redraw * yScale *');
-    var yText = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
-
-    var x = d3.scale.linear()
-        .domain([0, d3.max(viewdata, barValue)])
-        .range([0, maxBarWidth]);
-        
-        console.log('redraw * xScale *');
-  
-
-    // grid line labels
-    var gridContainer = chart.append('g')
-      .attr('transform', 'translate(' + barLabelWidth + ',' + gridLabelHeight + ')'); 
-
-    gridContainer.selectAll("text")
-      .data(x.ticks(10))
-      .transition()
-      .duration(500)
-      .attr("x", x)
-      .attr("dy", -3)
-      .attr("text-anchor", "middle")
-      .text(String);
-
-        console.log('redraw * gridContainer *');
-
-    // vertical grid lines
-    gridContainer.selectAll("line")
-      .data(x.ticks(10))
-      .transition()
-      .duration(500)
-      .attr("x1", x)
-      .attr("x2", x)
-      .attr("y1", 0)
-      .attr("y2", yScale.rangeExtent()[1] + gridChartOffset)
-      .style("stroke", "#ccc");
-        
-        console.log('redraw * gridContainer 2 *');
-
-    // bar labels
-    var labelsContainer = chart.append('g')
-      .attr('transform', 'translate(' + (barLabelWidth - barLabelPadding) + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
-    
-        console.log('redraw * labelContainer *');
-    
-    labelsContainer.selectAll('text')
-      .data(viewdata)
-      .transition()
-      .duration(500)
-      .attr('y', yText)
-      .attr('stroke', 'none')
-      .attr('fill', 'black')
-      .attr("dy", ".35em") // vertical-align: middle
-      .attr('text-anchor', 'end')
-      .text(barLabel);
-
-        console.log('redraw * labelContainer 2 *');
-
-
-    // bars
-    var barsContainer = chart.append('g')
-      .attr('transform', 'translate(' + barLabelWidth + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
-
-    barsContainer.selectAll("rect")
-      .data(viewdata)
-      .transition()
-      .duration(500)
+  bars.transition()
+    .duration(300)
+    .ease("quad")
       .attr('y', y)
       .attr('height', yScale.rangeBand() - 9)
       .attr('width', function ( d ) { return x(barValue(d)); })
       .attr('stroke', 'white')
-      .attr("id", function ( d,i ) { return barLabel(d); })
       .attr('fill','#00AE9D');
 
-    // bar value labels
-    barsContainer.selectAll("text")
-      .data(viewdata)
-      .transition()
-      .duration(500)
-      .attr("x", function(d) { return x(barValue(d)); })
-      .attr("y", yText)
-      .attr("dx", 3) // padding-left
-      .attr("dy", ".05em") // vertical-align: middle
-      .attr("text-anchor", "start") // text-align: right
-      .attr("fill", "black")
-      .attr("font-size", "15")
-      .attr("stroke", "none")
-      .text(function(d) { return d3.round(barValue(d), 2); });
-
-        console.log('redraw * barsContainer *');
+}
 
 
-    // start line
-    barsContainer.append("line")
-      .attr("y1", -gridChartOffset)
-      .attr("y2", yScale.rangeExtent()[1] + gridChartOffset)
-      .style("stroke", "#000");
+function init()
+{
 
-        console.log('redraw * end *');
+    //setup the svg
+    var chart = d3.select("#mega-chart")
+        .attr("width", w+100)
+        .attr("height", h+100)
 
+    chart.append("svg:rect")
+        .attr("width", "100%")
+        .attr("height", "100%")
+        .attr("stroke", "#000")
+        .attr("fill", "none")
 
-  
+    chart.append("svg:g")
+        .attr("id", "barchart")
+        .attr("transform", "translate(50,50)")
+    
+    // //setup our ui
+    // d3.select("#next")
+    //     .on("click", function(d,i) {
+    //         bars(viewdata)
+    //     })  
+         
+    // d3.select("#last")
+    //     .on("click", function(d,i) {
+    //         bars(data)
+    //     })   
 
+  _next.onclick = function() {
+    page++;
+    viewdata = sortedData.slice((page-1)*barnumber,page*barnumber);
+    console.log(viewdata);
+    bars(viewdata);
   };
 
-  console.log('all the way home baby');
+
+  _last.onclick = function() {
+    page--;
+    viewdata = sortedData.slice((page-1)*barnumber,page*barnumber);
+    console.log(viewdata);
+    bars(viewdata);
+  };
+
+
+
+    //make the bars
+    bars(viewdata)
 }
