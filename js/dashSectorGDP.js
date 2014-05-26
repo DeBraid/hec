@@ -1,6 +1,3 @@
-var labels = [],
-    figures = [];
-
 queue()
   .defer(d3.csv, '/csv/gdpBySectorAll-clean.csv')
   .await(makeChart);
@@ -14,7 +11,8 @@ function makeChart ( error, data ) {
   var gridLabelHeight = 18; // space reserved for gridline labels
   var gridChartOffset = 10; // space between start of grid and first bar
   var maxBarWidth = 420; // width of the bar with the max value
-   
+  var barnumber = 20;
+  var page = 1;
   // accessor functions 
   var barLabel = function(d) { return d['type']; };
   var barValue = function(d) { return parseFloat(+d['gdp']); };
@@ -24,35 +22,18 @@ function makeChart ( error, data ) {
    return d3.descending(barValue(a), barValue(b));
   }); 
 
-  console.log(sortedData);
-  console.log('sortedData ** ');
-
-  // sortedData.map(function (d,i) {
-    
-  //   var canada = [],
-  //       label = d.type,
-  //       strlab = label.toString();
-
-  //   if (strlab.indexOf('Primary')) {
-  
-  //     canada.push(d.type);
-    
-  //   }
-      
-  //     // console.log(canada);
-
-  // });
-
+  var viewdata = sortedData.slice((page-1)*barnumber,page*barnumber);
   // scales
-  var yScale = d3.scale.ordinal().domain(d3.range(0, sortedData.length)).rangeBands([0, sortedData.length * barHeight]);
+  var yScale = d3.scale.ordinal().domain(d3.range(0, viewdata.length)).rangeBands([0, viewdata.length * barHeight]);
   var y = function(d, i) { return yScale(i); };
   var yText = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
-  var x = d3.scale.linear().domain([0, d3.max(sortedData, barValue)]).range([0, maxBarWidth]);
+  var x = d3.scale.linear().domain([0, d3.max(viewdata, barValue)]).range([0, maxBarWidth]);
   
   // svg container element
   var chart = d3.select('#horz-bar-chart').append("svg")
     .attr('width', maxBarWidth + barLabelWidth + valueLabelWidth)
-    .attr('height', gridLabelHeight + gridChartOffset + sortedData.length * barHeight);
+    .attr('height', gridLabelHeight + gridChartOffset + viewdata.length * barHeight);
+
 
   // grid line labels
   var gridContainer = chart.append('g')
@@ -77,7 +58,8 @@ function makeChart ( error, data ) {
   // bar labels
   var labelsContainer = chart.append('g')
     .attr('transform', 'translate(' + (barLabelWidth - barLabelPadding) + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
-  labelsContainer.selectAll('text').data(sortedData).enter().append('text')
+  
+  labelsContainer.selectAll('text').data(viewdata).enter().append('text')
     .attr('y', yText)
     .attr('stroke', 'none')
     .attr('fill', 'black')
@@ -90,7 +72,7 @@ function makeChart ( error, data ) {
     .attr('transform', 'translate(' + barLabelWidth + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
 
   barsContainer.selectAll("rect")
-    .data(sortedData).enter().append("rect")
+    .data(viewdata).enter().append("rect")
     .attr('y', y)
     .attr('height', yScale.rangeBand() - 9)
     .attr('width', function ( d ) { return x(barValue(d)); })
@@ -100,7 +82,7 @@ function makeChart ( error, data ) {
 
   // bar value labels
   barsContainer.selectAll("text")
-    .data(sortedData).enter().append("text")
+    .data(viewdata).enter().append("text")
     .attr("x", function(d) { return x(barValue(d)); })
     .attr("y", yText)
     .attr("dx", 3) // padding-left
