@@ -27,18 +27,21 @@ function makeChart ( error, data ) {
   console.log(sortedData);
   console.log('sortedData ** ');
 
-  sortedData.map(function (d,i) {
-    var label = d.type;
-    var strlab = label.toString();
-    console.log(strlab);
-
-    if (strlab.indexOf('Canada')) {
-
-      alert('got ONE!')
+  // sortedData.map(function (d,i) {
     
-    }
+  //   var canada = [],
+  //       label = d.type,
+  //       strlab = label.toString();
 
-  });
+  //   if (strlab.indexOf('Primary')) {
+  
+  //     canada.push(d.type);
+    
+  //   }
+      
+  //     // console.log(canada);
+
+  // });
 
   // scales
   var yScale = d3.scale.ordinal().domain(d3.range(0, sortedData.length)).rangeBands([0, sortedData.length * barHeight]);
