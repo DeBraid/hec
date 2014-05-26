@@ -9,7 +9,7 @@ var valueLabelWidth = 40; // space reserved for value labels (right)
     page = 1,
     _next = document.getElementById('next'),
     _last = document.getElementById('last');
-    
+
 // accessor functions 
 var barLabel = function(d) { return d['type']; };
 var barValue = function(d) { return parseFloat(+d['gdp']); };
@@ -236,5 +236,5 @@ function initChart ( error, data ) {
 
   };
 
-  console.log('foo');
+  console.log('all the way home baby');
 }
