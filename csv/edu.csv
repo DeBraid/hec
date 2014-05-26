@@ -1,4 +1,4 @@
-firm,totalStu,localStu,forStu,pctlocforStu,gradRate,avgTuition,R&D
-Redeemer,1011,101,910,0.100,0.58,14720,253432
-McMaster,25456,23546.8,1909.2,0.925,0.872,6400,326000000
-Mohawk,16500,15300,1200,0.927,0.855,2600,7000000
+firm,Total,Local,Foreign,pctlocforStu,gradRate,avgTuition,RandD
+Redeemer,1011,910,101,90,58,14720,253432
+McMaster,25456,23546.8,1909.2,92.5,87.2,6400,326000000
+Mohawk,16500,15300,1200,92.7,85.5,2600,7000000

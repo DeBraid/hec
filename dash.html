@@ -29,8 +29,30 @@
 
 <div class="container">
 
-  <div class="col-lg-6">
+  <div class="col-lg-5">
+    <h2>Education in Hamilton</h2>
+    <div id="edu-stacked">
+      <!-- d3 chart -->
+    </div>
 
+  </div>
+
+  <div class="col-lg-5">
+    <h2>Health Care in Hamilton</h2>
+    <div id="health-stacked">
+      <!-- d3 chart -->
+    </div>
+
+  </div>
+
+</div>  
+
+
+
+<div class="container">
+
+  <div class="col-lg-6">
+    <h2>Graduation Rate</h2>
     <div id="edu-chart">
       <!-- d3 chart -->
     </div>
@@ -38,7 +60,7 @@
   </div>
 
   <div class="col-lg-6">
-
+    <h2>Annual Patient Visits</h2>
     <div id="health-chart">
       <!-- d3 chart -->
     </div>
@@ -51,8 +73,14 @@
 <div class="container">
 
   <div class="row horz-bar-chart-container">
+    
+    <h2>Diversity Score Overview</h2>
+    <div id="horz-bar-chart" class="col-lg-6">
+      <!-- d3 chart -->
+    </div>
 
-    <div id="horz-bar-chart">
+    <h3>Pillar Organization Share of Employment</h3>
+    <div id="emp-pie" class="col-lg-6">
       <!-- d3 chart -->
     </div>
 
@@ -66,7 +94,7 @@
       <button id="last">last</button>
     </div>
     
-    <div id="mega-chart" class="col-lg-12">
+    <div id="mega-chart" class="col-lg-6">
       <!-- d3 chart -->
     </div>
 
@@ -74,9 +102,15 @@
   </div>
 
 </div>      
+<script src="/js/stackedEdu.js"></script>
+<script src="/js/stackedHealth.js"></script>
 
+<!-- 
 <script src="/js/dash-horz-bars.js"></script>
-<script src="/js/dashSectorGDP.js"></script>
+<script src="/js/edu.js"></script>
+<script src="/js/health.js"></script>
+<script src="/js/emp-pie.js"></script>
+<script src="/js/dashSectorGDP.js"></script> -->
 </body>
 </html>
 

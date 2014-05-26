@@ -1,4 +1,4 @@
-d3.csv('/csv/edu.csv', function (error, data) {
+d3.csv('/csv/health.csv', function (error, data) {
   
   function renderChart() {
     
@@ -12,7 +12,9 @@ d3.csv('/csv/edu.csv', function (error, data) {
      
     // accessor functions 
     var barLabel = function(d) { return d['firm']; };
-    var barValue = function(d) { return parseFloat(+d['gradRate']); };
+    
+
+    var barValue = function(d) { return parseFloat(+d['Visits']); };
      
     // sorting
     var sortedData = data.sort(function(a, b) {
@@ -26,7 +28,7 @@ d3.csv('/csv/edu.csv', function (error, data) {
     var x = d3.scale.linear().domain([0, d3.max(sortedData, barValue)]).range([0, maxBarWidth]);
     
     // svg container element
-    var chart = d3.select('#edu-chart').append("svg")
+    var chart = d3.select('#health-chart').append("svg")
       .attr('width', maxBarWidth + barLabelWidth + valueLabelWidth)
       .attr('height', gridLabelHeight + gridChartOffset + sortedData.length * barHeight);
 
