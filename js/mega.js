@@ -1,3 +1,4 @@
+
 var valueLabelWidth = 70; // space reserved for value labels (right)
 var barHeight = 36; // height of one bar
 var barLabelWidth = 250; // space reserved for bar labels
@@ -6,11 +7,31 @@ var gridLabelHeight = 18; // space reserved for gridline labels
 var gridChartOffset = 10; // space between start of grid and first bar
 var maxBarWidth = 420; // width of the bar with the max value
  
-var _last = document.getElementById('last'),
+var barnumber = 10,
+    page = 1, 
+    _last = document.getElementById('last'),
     _next = document.getElementById('next'),
     barLabel = function(d) { return d['type']; },
     barValue = function(d) { return parseFloat(+d['gdp']); };
  
+_next.onclick = function() {
+    page++;
+    viewdata = data.slice(
+        (page-1) * barnumber,
+        page*barnumber
+    );
+    redraw();
+};
+
+_last.onclick = function() {
+    page--;
+    viewdata = data.slice(
+        
+        (page-1) * barnumber,
+        page*barnumber
+    );
+    redraw();
+};
 
 
 function renderChart() {
@@ -22,15 +43,16 @@ function renderChart() {
      return d3.descending(barValue(a), barValue(b));
     }); 
 
+    var viewdata = sortedData.slice((page-1)*barnumber,page*barnumber);
     // scales
-    var yScale = d3.scale.ordinal().domain(d3.range(0, sortedData.length)).rangeBands([0, sortedData.length * barHeight]);
+    var yScale = d3.scale.ordinal().domain(d3.range(0, viewdata.length)).rangeBands([0, viewdata.length * barHeight]);
     var y = function(d, i) { return yScale(i); };
     var yText = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
-    var x = d3.scale.linear().domain([0, d3.max(sortedData, barValue)]).range([0, maxBarWidth]);
+    var x = d3.scale.linear().domain([0, d3.max(viewdata, barValue)]).range([0, maxBarWidth]);
     // svg container element
     var chart = d3.select('#gdp-by-sector-chart').append("svg")
       .attr('width', maxBarWidth + barLabelWidth + valueLabelWidth)
-      .attr('height', gridLabelHeight + gridChartOffset + sortedData.length * barHeight);
+      .attr('height', gridLabelHeight + gridChartOffset + viewdata.length * barHeight);
 
     // grid line labels
     var gridContainer = chart.append('g')
@@ -55,7 +77,7 @@ function renderChart() {
     // bar labels
     var labelsContainer = chart.append('g')
       .attr('transform', 'translate(' + (barLabelWidth - barLabelPadding) + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
-    labelsContainer.selectAll('text').data(sortedData).enter().append('text')
+    labelsContainer.selectAll('text').data(viewdata).enter().append('text')
       .attr('y', yText)
       .attr('stroke', 'none')
       .attr('fill', 'black')
@@ -68,7 +90,7 @@ function renderChart() {
       .attr('transform', 'translate(' + barLabelWidth + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
 
     barsContainer.selectAll("rect")
-      .data(sortedData).enter().append("rect")
+      .data(viewdata).enter().append("rect")
       .attr('y', y)
       .attr('height', yScale.rangeBand() - 9)
       .attr('width', function ( d ) { return x(barValue(d)); })
@@ -78,7 +100,7 @@ function renderChart() {
 
     // bar value labels
     barsContainer.selectAll("text")
-      .data(sortedData).enter().append("text")
+      .data(viewdata).enter().append("text")
       .attr("x", function(d) { return x(barValue(d)); })
       .attr("y", yText)
       .attr("dx", 3) // padding-left
