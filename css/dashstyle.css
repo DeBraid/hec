@@ -1,14 +1,20 @@
-text {
-    font-size: 10px;
-    fill: rgb(89,89,89);
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+
+
+* {
+  font-family: 'Roboto', sans-serif !important;
 }
 
+text {
+  font-size: 10px;
+  fill: rgb(89,89,89);
+}
 
 .label{
-font-family: "ProximaNovaCondSbold","Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;
-font-size: 20px;
-fill: rgb(89,89,89);
+  font-size: 20px;
+  fill: rgb(89,89,89);
 }
+
 .axis path,
 .axis line {shape-rendering: crispEdges;}
 
@@ -17,7 +23,6 @@ fill: rgb(89,89,89);
 }
 
 #paginate-btns {
-    font-family: "ProximaNovaCondReg","Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;
     font-size: 18px;
     color: rgb(30,30,30);
 }
@@ -25,8 +30,6 @@ fill: rgb(89,89,89);
 #paginate-btns > button {
     float: right;
 }
-
-#title {font-family: "ProximaNovaCondBold","Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;font-size: 23px;}
 
 #Average {
     fill: tomato;
