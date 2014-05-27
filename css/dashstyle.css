@@ -6,7 +6,7 @@
 }
 
 text {
-  font-size: 10px;
+  font-size: 11px;
   fill: rgb(89,89,89);
 }
 
@@ -15,8 +15,16 @@ text {
   fill: rgb(89,89,89);
 }
 
+.x.axis path {
+  stroke: none;
+}
+
 .axis path,
-.axis line {shape-rendering: crispEdges;}
+.axis line {
+  shape-rendering: crispEdges;
+  stroke: rgb(89,89,89);
+  fill: none;
+}
 
 .mega-container {
     margin: 50px;

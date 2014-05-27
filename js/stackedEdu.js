@@ -46,7 +46,9 @@ d3.csv("/csv/edu.csv", function (data){
     var yAxis = d3.svg.axis()
         .scale(y)
         .orient("left")
-        .tickFormat(d3.format(".2s"));
+        .ticks(5)
+        .tickSize(4,0)
+        .tickFormat(function(d) { return d*0.0005; })
 
     var layer = svgEdu.selectAll(".layer-edu")
         .data(layers)
@@ -80,10 +82,10 @@ d3.csv("/csv/edu.csv", function (data){
         .call(yAxis)
       .append("text")
         .attr("transform", "rotate(-90)")
-        .attr({"x": -50, "y": -50})
+        .attr({"x": -80, "y": -50})
         .attr("dy", ".75em")
         .style("text-anchor", "end")
-        .text("Number of Students");
+        .text("Students (Thousands)");
 
     var legend = svgEdu.selectAll(".legend-edu")
         .data(headers.slice())

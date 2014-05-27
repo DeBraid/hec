@@ -14,9 +14,7 @@ var svgHealth = d3.select("#health-stacked").append("svg")
 
 d3.csv("/csv/health.csv", function (data){
 
-    var headers = ["Visits","Emergency","InPatient","Operating","Ambulatory"];
-console.log(headers);
-
+    var headers = ["Total Visits","Emergency","InPatient","Operating","Ambulatory"];
 
     var layers = d3.layout.stack()(headers.map(function(priceRange) {
         return data.map(function(d) {
@@ -48,7 +46,9 @@ console.log(headers);
     var yAxis = d3.svg.axis()
         .scale(y)
         .orient("left")
-        .tickFormat(d3.format(".2s"));
+        .ticks(5)
+        .tickSize(4,0)
+        .tickFormat(function(d) { return d*0.0005; })
 
     var layer = svgHealth.selectAll(".layer")
         .data(layers)
@@ -85,7 +85,7 @@ console.log(headers);
         .attr({"x": -80, "y": -50})
         .attr("dy", ".75em")
         .style("text-anchor", "end")
-        .text("Patient Activity");
+        .text("Patient Activity (Thousands)");
 
     var legend = svgHealth.selectAll(".legend")
         .data(headers.slice())
