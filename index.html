@@ -30,7 +30,7 @@
 
 </head>
 <body>
-  
+
   <div class="container">  
     <h1>Wealth & Workforce of Canadian Cities</h1>
     <hr />
@@ -39,58 +39,57 @@
   
       <div class="container-fluid" ng-controller="TypeaheadCtrl">
 
-        <input type="text" ng-model="selected" typeahead="city for city in cities | filter:$viewValue | limitTo:8" class="form-control" id="searchBox" onkeydown="checkFilled()" placeholder="Search for a city...">
+        <input type="search" ng-model="selected" typeahead="city for city in cities | filter:$viewValue | limitTo:8" class="form-control" id="searchBox" onkeyup="checkFilled()" placeholder="Search for a city...">
 
       </div>
 
-      <ul class="dropdown" ng-controller="DropdownCtrl">
-        <a class="dropdown-toggle">
-          List All
+      <div class="dropdown" ng-controller="DropdownCtrl">
+        <a class="btn btn-danger dropdown-toggle">
+          Hint
         </a>
-        <ul class="dropdown-menu">
+        <div class="dropdown-menu">
           <li ng-repeat="choice in items">
             <a onclick="checkFilled()">{{ choice }}</a>
           </li>
-        </ul>
-      </ul>
+        </div>
+      </div>
     </div>    
 
     <div id="chart"></div>  
 
     <aside id="tip">Mouseover the year to move forward and backwards through time.</aside>  
 
-    <div id="accord" ng-controller="AccordionCtrl">
-  
-      <accordion close-others="oneAtATime">
-        <accordion-group heading="SUMMARY" is-open="true">
-          With over 12,000 data points from the largest 28 metropolitan cities in Canada, behold the economy in motion from 1987 through 2018 (estimates).  Measurements for GDP, Income and Employment from Conference Board of Canada.   
-        </accordion-group>
+    <div class="row">
+      <div id="accord" ng-controller="AccordionCtrl">
+    
+        <accordion close-others="oneAtATime">
+          <accordion-group heading="SUMMARY" is-open="true">
+            With over 12,000 data points from the largest 28 metropolitan cities in Canada, behold the economy in motion from 1987 through 2018 (estimates).  Measurements for GDP, Income and Employment from Conference Board of Canada.   
+          </accordion-group>
 
-        <accordion-group heading="{{ group.title }}: {{ group.axis }}" ng-repeat="group in groups">
-          {{ group.content }}
-        </accordion-group>
+          <accordion-group heading="{{ group.title }}: {{ group.axis }}" ng-repeat="group in groups">
+            {{ group.content }}
+          </accordion-group>
 
-        <accordion-group is-open="isopen">
-            <accordion-heading>
-                Learn More... <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
-            </accordion-heading>
-            Email me to geek out on economics and data visualization: de.braid at gmail dot com 
-        </accordion-group>
-      </accordion>
+          <accordion-group is-open="isopen">
+              <accordion-heading>
+                  Learn More... <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
+              </accordion-heading>
+                  
+                    <p id="adopted">Visualization by <a href="http://www.cacheflow.ca" target="_blank">Derek Braid  </a>adopted from <a href="http://bost.ocks.org/mike/nations/" rel="author" target="_blank">Bostock, via Carden & Rosling</a></p>
+                  
+          </accordion-group>
+        </accordion>
 
+      </div>
     </div>
-
     
 
-    <footer>
-      <p id="adopted">Visualization by <a href="http://www.cacheflow.ca" target="_blank">Derek Braid  </a>adopted from <a href="http://bost.ocks.org/mike/nations/" rel="author" target="_blank">Bostock, via Carden & Rosling</a></p>
-    </footer>
 
   </div>
   
-  <script type="text/javascript" src="/js/accord-menu.js"></script>
   <script type="text/javascript" src="/js/wealth.js"></script>
-  <script type="text/javascript" src="/js/gdpchart.js"></script>
+  <script type="text/javascript" src="/js/accord-menu.js"></script>
   <script type="text/javascript" src="/js/inputSort.js"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@ function checkFilled () {
   var cities = [];
 
 
-  d3.selectAll('circle').each(function(d,i){
+  d3.selectAll("circle").each(function(d,i){
     
     var myId = d3.select(this).attr("id");
     
@@ -17,14 +17,10 @@ function checkFilled () {
 
   cities.forEach(function ( city ) {
   
-      if ( inputVal == null ) {
-
-          circleId.style("fill", "white");
-          
-      }
-      else if ( inputVal == city ){
+    if ( inputVal == city ){
 
           circleId.style("fill", "red");
+
                  
       }
   })

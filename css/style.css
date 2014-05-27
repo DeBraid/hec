@@ -60,12 +60,13 @@ text {
   cursor: ew-resize;
 }
 
-#adopted {
-  font-size: 0.7em;
-}
-
 .searched {
   fill: red;
+}
+
+.dropdown a {
+  cursor: pointer;
+  margin-top: 0.5em;
 }
 
 /* LINKS.HTML */
