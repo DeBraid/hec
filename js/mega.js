@@ -1,19 +1,22 @@
-d3.csv('/csv/gdpBySectorAll-clean.csv', function (error, data) {
-  
-  function renderChart() {
+var valueLabelWidth = 70; // space reserved for value labels (right)
+var barHeight = 36; // height of one bar
+var barLabelWidth = 250; // space reserved for bar labels
+var barLabelPadding = 5; // padding between bar and bar labels (left)
+var gridLabelHeight = 18; // space reserved for gridline labels
+var gridChartOffset = 10; // space between start of grid and first bar
+var maxBarWidth = 420; // width of the bar with the max value
+ 
+var _last = document.getElementById('last'),
+    _next = document.getElementById('next'),
+    barLabel = function(d) { return d['type']; },
+    barValue = function(d) { return parseFloat(+d['gdp']); };
+ 
+
+
+function renderChart() {
     
-    var valueLabelWidth = 40; // space reserved for value labels (right)
-    var barHeight = 36; // height of one bar
-    var barLabelWidth = 250; // space reserved for bar labels
-    var barLabelPadding = 5; // padding between bar and bar labels (left)
-    var gridLabelHeight = 18; // space reserved for gridline labels
-    var gridChartOffset = 10; // space between start of grid and first bar
-    var maxBarWidth = 420; // width of the bar with the max value
-     
-    // accessor functions 
-    var barLabel = function(d) { return d['type']; };
-    var barValue = function(d) { return parseFloat(+d['gdp']); };
-     
+  d3.csv('/csv/gdpBySectorAll-clean.csv', function (error, data) {
+      
     // sorting
     var sortedData = data.sort(function(a, b) {
      return d3.descending(barValue(a), barValue(b));
@@ -84,16 +87,15 @@ d3.csv('/csv/gdpBySectorAll-clean.csv', function (error, data) {
       .attr("fill", "black")
       .attr("font-size", "15")
       .attr("stroke", "none")
-      .text(function(d) { return d3.round(barValue(d), 2); });
+      .text(function(d) { return "$" + d3.round(barValue(d)*0.001, 3); });
 
     // start line
     barsContainer.append("line")
       .attr("y1", -gridChartOffset)
       .attr("y2", yScale.rangeExtent()[1] + gridChartOffset)
       .style("stroke", "#000");
-}
 
+  })
+};
 
-  renderChart();
-
-})
+window.onload = renderChart;
