@@ -8,7 +8,7 @@ d3.csv('/csv/generaldash.csv', function (error, data) {
     var barLabelPadding = 5; // padding between bar and bar labels (left)
     var gridLabelHeight = 18; // space reserved for gridline labels
     var gridChartOffset = 10; // space between start of grid and first bar
-    var maxBarWidth = 320; // width of the bar with the max value
+    var maxBarWidth = 300; // width of the bar with the max value
      
     // accessor functions 
     var barLabel = function(d) { return d['firm']; };
@@ -27,7 +27,7 @@ d3.csv('/csv/generaldash.csv', function (error, data) {
     
     // svg container element
     var chart = d3.select('#revenue-per-employee').append("svg")
-      .attr('width', maxBarWidth + barLabelWidth + valueLabelWidth)
+      .attr('width', maxBarWidth + barLabelWidth + valueLabelWidth + 20)
       .attr('height', gridLabelHeight + gridChartOffset + sortedData.length * barHeight);
 
     // grid line labels
@@ -35,15 +35,15 @@ d3.csv('/csv/generaldash.csv', function (error, data) {
       .attr('transform', 'translate(' + barLabelWidth + ',' + gridLabelHeight + ')'); 
 
     gridContainer.selectAll("text")
-      .data(x.ticks(10)).enter().append("text")
+      .data(x.ticks(3)).enter().append("text")
       .attr("x", x)
       .attr("dy", -3)
       .attr("text-anchor", "middle")
-      .text(String);
+      .text(function(d){ return "$" + d });
 
     // vertical grid lines
     gridContainer.selectAll("line")
-      .data(x.ticks(10)).enter().append("line")
+      .data(x.ticks(3)).enter().append("line")
       .attr("x1", x)
       .attr("x2", x)
       .attr("y1", 0)
@@ -85,7 +85,7 @@ d3.csv('/csv/generaldash.csv', function (error, data) {
       .attr("fill", "black")
       .attr("font-size", "15")
       .attr("stroke", "none")
-      .text(function(d) { return d3.round(barValue(d), 2); });
+      .text(function(d) { return "$" + d3.round(barValue(d)); });
 
     // start line
     barsContainer.append("line")

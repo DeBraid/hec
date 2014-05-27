@@ -38,7 +38,7 @@ d3.csv('/csv/generaldash.csv', function (error, data) {
       .attr("x", x)
       .attr("dy", -3)
       .attr("text-anchor", "middle")
-      .text(String);
+      .text(function (d) { return d + "%"});
 
     // vertical grid lines
     gridContainer.selectAll("line")
@@ -84,7 +84,7 @@ d3.csv('/csv/generaldash.csv', function (error, data) {
       .attr("fill", "black")
       .attr("font-size", "15")
       .attr("stroke", "none")
-      .text(function(d) { return d3.round(barValue(d), 2); });
+      .text(function(d) { return d3.round(barValue(d), 2) + "%"; });
 
     // start line
     barsContainer.append("line")

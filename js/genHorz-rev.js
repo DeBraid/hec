@@ -34,15 +34,15 @@ d3.csv('/csv/generaldash.csv', function (error, data) {
       .attr('transform', 'translate(' + barLabelWidth + ',' + gridLabelHeight + ')'); 
 
     gridContainer.selectAll("text")
-      .data(x.ticks(10)).enter().append("text")
+      .data(x.ticks(2)).enter().append("text")
       .attr("x", x)
       .attr("dy", -3)
       .attr("text-anchor", "middle")
-      .text(String);
+      .text(function(d){ return "$" + d*0.000001 });
 
     // vertical grid lines
     gridContainer.selectAll("line")
-      .data(x.ticks(10)).enter().append("line")
+      .data(x.ticks(2)).enter().append("line")
       .attr("x1", x)
       .attr("x2", x)
       .attr("y1", 0)
@@ -84,7 +84,7 @@ d3.csv('/csv/generaldash.csv', function (error, data) {
       .attr("fill", "black")
       .attr("font-size", "15")
       .attr("stroke", "none")
-      .text(function(d) { return d3.round(barValue(d), 2); });
+      .text(function(d) { return "$" + d3.round(barValue(d)*0.000001); });
 
     // start line
     barsContainer.append("line")
