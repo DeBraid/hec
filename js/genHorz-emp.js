@@ -8,7 +8,7 @@ d3.csv('/csv/generaldash.csv', function (error, data) {
     var barLabelPadding = 5; // padding between bar and bar labels (left)
     var gridLabelHeight = 18; // space reserved for gridline labels
     var gridChartOffset = 10; // space between start of grid and first bar
-    var maxBarWidth = 420; // width of the bar with the max value
+    var maxBarWidth = 320; // width of the bar with the max value
      
     // accessor functions 
     var barLabel = function(d) { return d['firm']; };
