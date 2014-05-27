@@ -77,7 +77,7 @@ d3.json("/js/myNations.json", function(nations) {
     .enter().append("circle")
       .attr("class", "dot")
       .attr("id", function () { return this.__data__.city; })
-      .style("fill", function(d) { return colorScale(color(d)); })
+      .style("fill", "#00AE9D")
       .call(position)
       .sort(order);
 
