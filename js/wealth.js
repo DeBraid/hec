@@ -5,9 +5,21 @@ function radius(d) { return d.uRate; }
 function color(d) { return d.region; }
 function key(d) { return d.city; }
 
+
 var tip = d3.tip()
     .attr('class', 'd3-tip')
-    .html(function(d) { return '<span>' + d.city + '</span>' + ' and foobar' })
+    .html(function(d) { 
+      return '<span>City: ' + d.city + '</span>' 
+          + '<br>'
+          + '<br>'
+          + 'GDP: ' 
+          + '<span>' + '$' + d3.round(d.gdp*0.001, 0) + ' billion' + '</span>'
+          + '<br>'
+          + '<br>'
+          + 'Income: ' 
+          + '<span>' + '$' + d3.round(d.income) + ' per person' + '</span>';
+
+    })
     .offset([-12, 0]);
 
 // Chart dimensions.
@@ -32,6 +44,7 @@ var svg = d3.select("#chart").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+svg.call(tip);
 // Add the x-axis.
 svg.append("g")
     .attr("class", "x axis")
