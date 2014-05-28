@@ -26,7 +26,7 @@ function renderChart() {
     }); 
     
     var viewdata = sortedData.slice((page-1)*barnumber,page*barnumber);
-    
+
     _next.onclick = function() {
         page++;
         viewdata = sortedData.slice(
@@ -122,29 +122,18 @@ function renderChart() {
 
 
     function redraw () {
-              // scales
+        console.log(viewdata);
+
+        // scales
         var yScale = d3.scale.ordinal().domain(d3.range(0, viewdata.length)).rangeBands([0, viewdata.length * barHeight]);
         var y = function(d, i) { return yScale(i); };
         var yText = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
-        var x = d3.scale.linear().domain([0, d3.max(viewdata, barValue)]).range([0, maxBarWidth]);
-        // svg container element
-        var chart = d3.select('#gdp-by-sector-chart').append("svg")
-          .attr('width', maxBarWidth + barLabelWidth + valueLabelWidth)
-          .attr('height', gridLabelHeight + gridChartOffset + viewdata.length * barHeight);
-
-        // grid line labels
-        var gridContainer = chart.append('g')
-          .attr('transform', 'translate(' + barLabelWidth + ',' + gridLabelHeight + ')'); 
-
-        // bar labels
-        var labelsContainer = chart.append('g')
-          .attr('transform', 'translate(' + (barLabelWidth - barLabelPadding) + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
-
-        var barsContainer = chart.append('g')
-          .attr('transform', 'translate(' + barLabelWidth + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
+        var x = d3.scale.linear()
+                .domain([0, d3.max(viewdata, barValue)])
+                .range([0, maxBarWidth]);
 
         gridContainer.selectAll("text")
-          .data(x.ticks(10)).enter().append("text")
+          .data(x.ticks(10)).transition.duration(500)
           .attr("x", x)
           .attr("dy", -3)
           .attr("text-anchor", "middle")
@@ -152,14 +141,14 @@ function renderChart() {
 
         // vertical grid lines
         gridContainer.selectAll("line")
-          .data(x.ticks(10)).enter().append("line")
+          .data(x.ticks(10)).transition.duration(500)
           .attr("x1", x)
           .attr("x2", x)
           .attr("y1", 0)
           .attr("y2", yScale.rangeExtent()[1] + gridChartOffset)
           .style("stroke", "#ccc");
 
-        labelsContainer.selectAll('text').data(viewdata).enter().append('text')
+        labelsContainer.selectAll('text').data(viewdata).transition.duration(500)
           .attr('y', yText)
           .attr('stroke', 'none')
           .attr('fill', 'black')
@@ -168,7 +157,7 @@ function renderChart() {
           .text(barLabel);
 
         barsContainer.selectAll("rect")
-          .data(viewdata).enter().append("rect")
+          .data(viewdata).transition.duration(500)
           .attr('y', y)
           .attr('height', yScale.rangeBand() - 9)
           .attr('width', function ( d ) { return x(barValue(d)); })
@@ -178,7 +167,7 @@ function renderChart() {
 
         // bar value labels
         barsContainer.selectAll("text")
-          .data(viewdata).enter().append("text")
+          .data(viewdata).transition.duration(500)
           .attr("x", function(d) { return x(barValue(d)); })
           .attr("y", yText)
           .attr("dx", 3) // padding-left
