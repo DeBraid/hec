@@ -7,6 +7,11 @@ var gridLabelHeight = 18; // space reserved for gridline labels
 var gridChartOffset = 10; // space between start of grid and first bar
 var maxBarWidth = 420; // width of the bar with the max value
  
+var tip = d3.tip()
+    .attr('class', 'd3-tip')
+    .html(function(d) { return '<span>' + d.gdp + '</span>' + ' total gdp' })
+    .offset([-12, 0]);
+
 var barnumber = 10,
     page = 1, 
     _last = document.getElementById('last'),
@@ -68,6 +73,8 @@ function renderChart() {
     var barsContainer = chart.append('g')
       .attr('transform', 'translate(' + barLabelWidth + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
 
+    chart.call(tip);
+
     gridContainer.selectAll("text")
       .data(x.ticks(10)).enter().append("text")
       .attr("x", x)
@@ -99,7 +106,9 @@ function renderChart() {
       .attr('width', function ( d ) { return x(barValue(d)); })
       .attr('stroke', 'white')
       .attr("id", function ( d,i ) { return barLabel(d); })
-      .attr('fill','#00AE9D');
+      .attr('fill','#00AE9D')
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide);
 
     // bar value labels
     barsContainer.selectAll("text")
