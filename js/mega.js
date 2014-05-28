@@ -9,7 +9,7 @@ var maxBarWidth = 420; // width of the bar with the max value
  
 var tip = d3.tip()
     .attr('class', 'd3-tip')
-    .html(function(d) { return '<span>' + d.gdp + '</span>' + ' total gdp' })
+    .html(function(d) { return '<span>' + d3.round((d.gdp/1571741)*100,2) + '</span>' + '% of total economy' })
     .offset([-12, 0]);
 
 var barnumber = 10,
