@@ -5,6 +5,11 @@ function radius(d) { return d.uRate; }
 function color(d) { return d.region; }
 function key(d) { return d.city; }
 
+var tip = d3.tip()
+    .attr('class', 'd3-tip')
+    .html(function(d) { return '<span>' + d.city + '</span>' + ' and foobar' })
+    .offset([-12, 0]);
+
 // Chart dimensions.
 var margin = {top: 19.5, right: 19.5, bottom: 19.5, left: 39.5},
     width = 960 - margin.right,
@@ -76,6 +81,8 @@ d3.json("/js/myNations.json", function(nations) {
       .data(interpolateData(1987))
     .enter().append("circle")
       .attr("class", "dot")
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
       .attr("id", function () { return this.__data__.city; })
       .style("fill", "#00AE9D")
       .call(position)
