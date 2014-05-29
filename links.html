@@ -29,14 +29,37 @@
 
 <div class="row">
   <div class="container">
-    
+
     <div class="header">
-      <h1>Sizing up Hamilton Economy: Total Revenue vs GDP</h1>
+      <h1>Sizing up Hamilton Economy</h1>
+      <h3>GDP by Sector 1987-2014</h3>
     </div>
+
+    <div id="line-chart">
+      <!-- d3 sector line chart -->
+    </div>
+
+  </div>  
+</div> 
+
+<div class="row">
+  <div class="container">
+
+    <div class="header">
+      <h1>Sizing up Hamilton Economy</h1>
+      <h3>Revenue Relative to total GDP</h3>
+    </div>
+
+    <div id="sankey-chart">
+      <!-- d3 SANKEY links chart -->
+    </div>
+
+  </div>  
+</div>
     
-    <div id="chart"></div>
-    
-    <div class="row">
+
+<div class="row">
+  <div class="container">
       <div class="col-md-4">
         <h2>#HES2014 Participants</h2>
         <ul>
@@ -63,14 +86,14 @@
           <li>Participants output nearly equal to whole Manfacturing sector alone.</li>
         </ul>
       </div>
-      
-    </div>
-
   </div>
-</div>
   
-<script src="/js/d3sankey.js"></script>
-<script src="/js/citysank.js"></script>
+</div>
+
+  
+<script src="/js/sectorGDPline.js"></script>
+<!-- <script src="/js/d3sankey.js"></script> -->
+<!-- <script src="/js/citysank.js"></script> -->
 
 </body>
 </html>

@@ -9,7 +9,7 @@ var formatNumber = d3.format(",.0f"),    // zero decimal places
     color = d3.scale.category20();
  
 // append the svg canvas to the page
-var svg = d3.select("#chart").append("svg")
+var svg = d3.select("#sankey-chart").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
