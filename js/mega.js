@@ -30,7 +30,7 @@ function renderChart() {
      return d3.descending(barValue(a), barValue(b));
     }); 
     
-    var viewdata = sortedData.slice((page-1)*barnumber,page*barnumber);
+    var viewdata = sortedData;
 
     _next.onclick = function() {
         page++;

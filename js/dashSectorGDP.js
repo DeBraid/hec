@@ -1,4 +1,4 @@
-var valueLabelWidth = 40; // space reserved for value labels (right)
+var valueLabelWidth = 40, // space reserved for value labels (right)
     barHeight = 36, // height of one bar
     barLabelWidth = 200, // space reserved for bar labels
     barLabelPadding = 5, // padding between bar and bar labels (left)
@@ -10,7 +10,7 @@ var valueLabelWidth = 40; // space reserved for value labels (right)
     _next = document.getElementById('next'),
     _last = document.getElementById('last');
 
-    var w = 400, h = 400;
+var w = 400, h = 400;
 
 
 // accessor functions 

@@ -17,7 +17,8 @@ var tip = d3.tip()
           + '<br>'
           + '<br>'
           + 'Income: ' 
-          + '<span>' + '$' + d3.round(d.income) + ' per person' + '</span>';
+          + '<span>' + '$' + d3.round(d.income) + ' per person' + '</span>'
+          + '<br>';
 
     })
     .offset([-12, 0]);
@@ -100,10 +101,6 @@ d3.json("/js/myNations.json", function(nations) {
       .style("fill", "#00AE9D")
       .call(position)
       .sort(order);
-
-  // Add a title.
-  dot.append("title")
-      .text(function(d) { return d.city; });
 
   // Add an overlay for the year label.
   var box = label.node().getBBox();
