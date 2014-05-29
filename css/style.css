@@ -77,10 +77,19 @@ text {
   stroke-width: 0.2em;
 }
 
+.city text {
+  font-size: 0.8em;
+}
+
 .city path:hover {
   fill: #000;
   fill-opacity: 0.1;
   stroke-width: 0.6em;
+
+}
+
+#line-chart {
+  position: relative;
 }
 
 #line-chart .x path.domain {

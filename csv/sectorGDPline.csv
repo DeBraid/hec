@@ -1,4 +1,4 @@
-date,All Industries,Goods Producing Industries,Service-Producing Industries,Manufacturing,Construction,Transportation and Warehousing,Wholesale and Retail Trade,"Finance, Insurance and Real Estate",Information and Cultural Industries,Other Services - All,Business Services,"Education, Health Care, Agriculture, other Primary Industries"
+date,All Industries,Goods Producing Industries,Service-Producing Industries,Manufacturing,Construction,Transportation and Warehousing,Wholesale and Retail Trade,"Finance, Insurance and Real Estate",Information and Cultural Industries,Other Services - All,Business Services,"Education, Health Care, Agriculture, Primary Industries"
 1987.01,16355.3,6137.4,10218.0,4496.9,1171.7,389.4,1513.2,2523.0,178.8,5273.3,809.0,4464.3
 1987.25,16486.5,6206.4,10280.1,4517.3,1222.7,409.8,1532.9,2546.0,183.6,5284.2,789.9,4494.3
 1987.50,16840.3,6461.8,10378.5,4638.5,1303.6,415.4,1524.4,2573.8,189.9,5399.3,795.5,4603.8
@@ -106,5 +106,5 @@ date,All Industries,Goods Producing Industries,Service-Producing Industries,Manu
 2013.01,26220.7,6734.0,19486.6,4121.8,2023.6,885.3,3412.1,5572.9,767.7,7437.1,2000.2,5436.9
 2013.25,26374.8,6731.4,19643.3,4142.2,2002.5,874.0,3444.1,5630.2,780.1,7479.4,2022.3,5457.1
 2013.50,26453.1,6685.9,19767.3,4127.0,1982.2,859.6,3478.1,5670.2,793.2,7500.6,2042.3,5458.3
-2013.75,26495.1,6719.4,19775.7,4142.2,2011.7,849.1,3477.5,5668.6,800.5,7491.2,2054.3,5436.9
-2014.01,26735.9,6818.1,19917.8,4213.1,2016.5,879.1,3519.1,5711.5,789.7,7553.5,2053.4,5500.1
+2013.75,26495.1,6719.4,19775.7,4142.2,2011.7,849.1,3477.5,5668.6,800.5,7491.2,2074.3,5436.9
+2014.01,26735.9,6818.1,19917.8,4213.1,2000.5,879.1,3519.1,5711.5,789.7,7553.5,2119.4,5500.1

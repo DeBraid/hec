@@ -1,5 +1,5 @@
 
-var margin = {top: 20, right: 180, bottom: 30, left: 50},
+var margin = {top: 20, right: 300, bottom: 30, left: 50},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
@@ -29,20 +29,21 @@ var line = d3.svg.line()
 var svg = d3.select('#line-chart').append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
+    .attr("id", "linesvg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 d3.csv("/csv/sectorGDPline.csv", function(error, data) {
   var headers = [
 
+        "Finance, Insurance and Real Estate",
+        "Education, Health Care, Agriculture, Primary Industries",
         "Manufacturing",
+        "Wholesale and Retail Trade",
+        "Business Services",
         "Construction",
         "Transportation and Warehousing",
-        "Wholesale and Retail Trade",
-        "Finance, Insurance and Real Estate",
         "Information and Cultural Industries",
-        "Business Services",
-        "Education, Health Care, Agriculture, other Primary Industries"
 
   ];
   
@@ -67,7 +68,8 @@ d3.csv("/csv/sectorGDPline.csv", function(error, data) {
   svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
+      .call(xAxis)
+      .text("String");
 
   svg.append("g")
       .attr("class", "y axis")
@@ -94,5 +96,28 @@ d3.csv("/csv/sectorGDPline.csv", function(error, data) {
       .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.gdp) + ")"; })
       .attr("x", 3)
       .attr("dy", ".35em")
-      .text(function(d) { return d.name; });
+      .attr("id", "wrapme")
+      .text(function(d) { return '$ ' + d3.round(d.value.gdp*0.01, 2) + ' billion' });
+
+
+
+var legend = svg.selectAll(".legend")
+        .data(sectors)
+            .enter().append("g")
+            .attr("class", "legend")
+            .attr("transform", function(d, i) { return "translate(275," + (i * 60) + ")"; });
+
+        legend.append("rect")
+            .attr("x", width - 18)
+            .attr("width", 18)
+            .attr("height", 18)
+            .style("fill", function (d) { return color(d.name) });
+
+        legend.append("text")
+              .attr("x", width - 24)
+              .attr("y", 9)
+              .attr("dy", ".35em")
+              .style("text-anchor", "end")
+              .text(function(d) { return d.name });
+            
 });
