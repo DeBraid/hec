@@ -26,7 +26,7 @@ var line = d3.svg.line()
     .x(function(d) { return x(d.date); })
     .y(function(d) { return y(d.gdp); });
 
-var svg = d3.select('#line-chart').append("svg")
+var svgLine = d3.select('#line-chart').append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .attr("id", "linesvg")
@@ -65,13 +65,13 @@ d3.csv("/csv/sectorGDPline.csv", function(error, data) {
     d3.max(sectors, function(c) { return d3.max(c.values, function(v) { return v.gdp; }); })
   ]);
 
-  svg.append("g")
+  svgLine.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis)
       .text("String");
 
-  svg.append("g")
+  svgLine.append("g")
       .attr("class", "y axis")
       .call(yAxis)
     .append("text")
@@ -81,7 +81,7 @@ d3.csv("/csv/sectorGDPline.csv", function(error, data) {
       .style("text-anchor", "end")
       .text("GDP");
 
-  var city = svg.selectAll(".city")
+  var city = svgLine.selectAll(".city")
       .data(sectors)
     .enter().append("g")
       .attr("class", "city");
@@ -96,18 +96,17 @@ d3.csv("/csv/sectorGDPline.csv", function(error, data) {
       .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.gdp) + ")"; })
       .attr("x", 3)
       .attr("dy", ".35em")
-      .attr("id", "wrapme")
       .text(function(d) { return '$ ' + d3.round(d.value.gdp*0.01, 2) + ' billion' });
 
 
 
-var legend = svg.selectAll(".legend")
+var legend = svgLine.selectAll(".legend")
         .data(sectors)
             .enter().append("g")
             .attr("class", "legend")
             .attr("transform", function(d, i) { return "translate(275," + (i * 60) + ")"; });
 
-        legend.append("rect")
+        legend.append("svg:rect")
             .attr("x", width - 18)
             .attr("width", 18)
             .attr("height", 18)
