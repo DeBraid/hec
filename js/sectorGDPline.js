@@ -1,9 +1,9 @@
 
-var margin = {top: 20, right: 80, bottom: 30, left: 50},
+var margin = {top: 20, right: 180, bottom: 30, left: 50},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
-var parseDate = d3.time.format("%Y%m%d").parse;
+// var parseDate = d3.time.format("%Y%m%d").parse;
 
 var x = d3.time.scale()
     .range([0, width]);
@@ -33,13 +33,20 @@ var svg = d3.select('#line-chart').append("svg")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 d3.csv("/csv/sectorGDPline.csv", function(error, data) {
-  var headers = ["Manufacturing","Construction","Transportation and Warehousing","Wholesale and Retail Trade","Finance, Insurance and Real Estate","Information and Cultural Industries","Business Services","Education, Health Care, Agriculture, other Primary Industries"];
+  var headers = [
+
+        "Manufacturing",
+        "Construction",
+        "Transportation and Warehousing",
+        "Wholesale and Retail Trade",
+        "Finance, Insurance and Real Estate",
+        "Information and Cultural Industries",
+        "Business Services",
+        "Education, Health Care, Agriculture, other Primary Industries"
+
+  ];
   
   color.domain(headers);
-
-  data.forEach(function(d) {
-    d.date = +d.date;
-  });
 
   var sectors = color.domain().map(function(name) {
     return {

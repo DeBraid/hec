@@ -35,7 +35,8 @@ text {
   stroke: #000;
 }
 
-.axis path, .axis line {
+.axis path, 
+.axis line {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
@@ -73,7 +74,17 @@ text {
 
 .city path {
   fill: none;
-  stroke-width: 0.5em;
+  stroke-width: 0.2em;
+}
+
+.city path:hover {
+  fill: #000;
+  fill-opacity: 0.1;
+  stroke-width: 0.6em;
+}
+
+#line-chart .x path.domain {
+  display: none;
 }
 
 .node rect {
