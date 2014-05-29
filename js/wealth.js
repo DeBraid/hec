@@ -9,7 +9,7 @@ function key(d) { return d.city; }
 var tip = d3.tip()
     .attr('class', 'd3-tip')
     .html(function(d) { 
-      return '<span>City: ' + d.city + '</span>' 
+      return '<span>' + d.city + '</span>' 
           + '<br>'
           + '<br>'
           + 'GDP: ' 
