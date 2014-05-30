@@ -19,6 +19,8 @@ var barnumber = 10,
     barLabel = function(d) { return d['type']; },
     barValue = function(d) { return parseFloat(+d['gdp']); };
  
+ var topBarSelector = document.getElementById('Canada All');
+ var topBarSelector = document.getElementById('Abbotsford Information and Cultural')
 
 
 function renderChart() {
@@ -27,10 +29,15 @@ function renderChart() {
       
     // sorting
     var sortedData = data.sort(function(a, b) {
-      
+
+      // if (not A or B) { draw bars }
+
      return d3.descending(barValue(a), barValue(b));
     }); 
     
+    var topBar = sortedData.slice(0,1);
+    var bottBar = sortedData.slice(-1);
+
     var viewdata = sortedData;
 
     _next.onclick = function() {
