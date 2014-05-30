@@ -1,4 +1,4 @@
-d3.csv('/csv/diversity.csv', function (error, data) {
+d3.csv('/csv/startups.csv', function (error, data) {
   
   function renderChart() {
     
@@ -8,11 +8,11 @@ d3.csv('/csv/diversity.csv', function (error, data) {
     var barLabelPadding = 5; // padding between bar and bar labels (left)
     var gridLabelHeight = 18; // space reserved for gridline labels
     var gridChartOffset = 10; // space between start of grid and first bar
-    var maxBarWidth = 420; // width of the bar with the max value
+    var maxBarWidth = 320; // width of the bar with the max value
      
     // accessor functions 
-    var barLabel = function(d) { return d['city']; };
-    var barValue = function(d) { return parseFloat(+d['score']); };
+    var barLabel = function(d) { return d['Region']; };
+    var barValue = function(d) { return parseFloat(+d['Startups']); };
      
     // sorting
     var sortedData = data.sort(function(a, b) {
@@ -25,7 +25,7 @@ d3.csv('/csv/diversity.csv', function (error, data) {
     var yText = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
     var x = d3.scale.linear().domain([0, d3.max(sortedData, barValue)]).range([0, maxBarWidth]);
     // svg container element
-    var chart = d3.select('#diversity-chart').append("svg")
+    var chart = d3.select('#startups').append("svg")
       .attr('width', maxBarWidth + barLabelWidth + valueLabelWidth)
       .attr('height', gridLabelHeight + gridChartOffset + sortedData.length * barHeight);
 
@@ -34,15 +34,15 @@ d3.csv('/csv/diversity.csv', function (error, data) {
       .attr('transform', 'translate(' + barLabelWidth + ',' + gridLabelHeight + ')'); 
 
     gridContainer.selectAll("text")
-      .data(x.ticks(10)).enter().append("text")
+      .data(x.ticks(5)).enter().append("text")
       .attr("x", x)
       .attr("dy", -3)
       .attr("text-anchor", "middle")
-      .text(String);
+      .text(function(d){ return d });
 
     // vertical grid lines
     gridContainer.selectAll("line")
-      .data(x.ticks(10)).enter().append("line")
+      .data(x.ticks(5)).enter().append("line")
       .attr("x1", x)
       .attr("x2", x)
       .attr("y1", 0)
@@ -84,7 +84,7 @@ d3.csv('/csv/diversity.csv', function (error, data) {
       .attr("fill", "black")
       .attr("font-size", "15")
       .attr("stroke", "none")
-      .text(function(d) { return d3.round(barValue(d), 2); });
+      .text(function(d) { return barValue(d); });
 
     // start line
     barsContainer.append("line")

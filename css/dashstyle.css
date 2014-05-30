@@ -39,7 +39,8 @@ text {
     float: right;
 }
 
-#Average {
+#Average,
+#Median {
     fill: tomato;
 }
 
