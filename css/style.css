@@ -42,8 +42,10 @@ text {
   shape-rendering: crispEdges;
 }
 
+
 .label {
   fill: #777;
+  font-size: 100%;
 }
 
 .year.label {

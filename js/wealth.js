@@ -35,8 +35,8 @@ var xScale = d3.scale.linear().domain([18e3, 45e3]).range([0, width]),
     colorScale = d3.scale.category10();
 
 // The x & y axes.
-var xAxis = d3.svg.axis().orient("bottom").scale(xScale).ticks(12, d3.format(",d")),
-    yAxis = d3.svg.axis().scale(yScale).orient("left");
+var xAxis = d3.svg.axis().orient("bottom").scale(xScale).ticks(6, d3.format(",d")),
+    yAxis = d3.svg.axis().scale(yScale).ticks(3, d3.format("2s")).orient("left");
 
 // Create the SVG container and set the origin.
 var svg = d3.select("#chart").append("svg")
