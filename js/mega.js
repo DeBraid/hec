@@ -27,6 +27,7 @@ function renderChart() {
       
     // sorting
     var sortedData = data.sort(function(a, b) {
+      
      return d3.descending(barValue(a), barValue(b));
     }); 
     

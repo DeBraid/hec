@@ -1,19 +1,24 @@
+var valueLabelWidth = 40; // space reserved for value labels (right)
+var barHeight = 36; // height of one bar
+var barLabelWidth = 100; // space reserved for bar labels
+var barLabelPadding = 5; // padding between bar and bar labels (left)
+var gridLabelHeight = 18; // space reserved for gridline labels
+var gridChartOffset = 10; // space between start of grid and first bar
+var maxBarWidth = 320; // width of the bar with the max value
+ 
+// accessor functions 
+var barLabel = function(d) { return d['Region']; };
+var barValue = function(d) { return parseFloat(+d['Startups']); };
+ 
+var tip = d3.tip()
+    .attr('class', 'd3-tip')
+    .html(function(d) { return d.Startups })
+    .offset([-12, 0]);
+
 d3.csv('/csv/startups.csv', function (error, data) {
   
   function renderChart() {
     
-    var valueLabelWidth = 40; // space reserved for value labels (right)
-    var barHeight = 36; // height of one bar
-    var barLabelWidth = 100; // space reserved for bar labels
-    var barLabelPadding = 5; // padding between bar and bar labels (left)
-    var gridLabelHeight = 18; // space reserved for gridline labels
-    var gridChartOffset = 10; // space between start of grid and first bar
-    var maxBarWidth = 320; // width of the bar with the max value
-     
-    // accessor functions 
-    var barLabel = function(d) { return d['Region']; };
-    var barValue = function(d) { return parseFloat(+d['Startups']); };
-     
     // sorting
     var sortedData = data.sort(function(a, b) {
      return d3.descending(barValue(a), barValue(b));
@@ -64,6 +69,8 @@ d3.csv('/csv/startups.csv', function (error, data) {
     var barsContainer = chart.append('g')
       .attr('transform', 'translate(' + barLabelWidth + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
 
+      chart.call(tip);
+
     barsContainer.selectAll("rect")
       .data(sortedData).enter().append("rect")
       .attr('y', y)
@@ -71,7 +78,9 @@ d3.csv('/csv/startups.csv', function (error, data) {
       .attr('width', function ( d ) { return x(barValue(d)); })
       .attr('stroke', 'white')
       .attr("id", function ( d,i ) { return barLabel(d); })
-      .attr('fill','#00AE9D');
+      .attr('fill','#00AE9D')
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide);
 
     // bar value labels
     barsContainer.selectAll("text")
