@@ -39,7 +39,7 @@ d3.csv('/csv/startups.csv', function (error, data) {
       .attr('transform', 'translate(' + barLabelWidth + ',' + gridLabelHeight + ')'); 
 
     gridContainer.selectAll("text")
-      .data(x.ticks(5)).enter().append("text")
+      .data(x.ticks(3)).enter().append("text")
       .attr("x", x)
       .attr("dy", -3)
       .attr("text-anchor", "middle")
@@ -47,7 +47,7 @@ d3.csv('/csv/startups.csv', function (error, data) {
 
     // vertical grid lines
     gridContainer.selectAll("line")
-      .data(x.ticks(5)).enter().append("line")
+      .data(x.ticks(3)).enter().append("line")
       .attr("x1", x)
       .attr("x2", x)
       .attr("y1", 0)
