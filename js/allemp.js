@@ -11,14 +11,14 @@ var totalEmp = 379200;
 var barLabel = function(d) { return d['Company']; };
 var barValue = function(d) { return parseFloat(+d['Employees']); };
 
-var tip = d3.tip()
-    .attr('class', 'd3-tip')
-    .html(function(d) { 
-    return  'Share of Jobs in Hamilton: ' 
-          + '<span>' + d3.round(d.Employees*100/totalEmp, 2) + '%' + '</span>' 
-          + '<br>';
-     })
-    .offset([-12, 0]);
+// var tip = d3.tip()
+//     .attr('class', 'd3-tip')
+//     .html(function(d) { 
+//     return  'Share of Jobs in Hamilton: ' 
+//           + '<span>' + d3.round(d.Employees*100/totalEmp, 2) + '%' + '</span>' 
+//           + '<br>';
+//      })
+//     .offset([-12, 0]);
 
 d3.csv('/csv/allemp.csv', function (error, data) {
   
@@ -29,7 +29,7 @@ d3.csv('/csv/allemp.csv', function (error, data) {
      return d3.descending(barValue(a), barValue(b));
     }); 
     
-    if (sortedData.length > 10) { sortedData.length = 12 };
+    if (sortedData.length > 12) { sortedData.length = 12 };
 
     // scales
     var yScale = d3.scale.ordinal().domain(d3.range(0, sortedData.length)).rangeBands([0, sortedData.length * barHeight]);
@@ -37,12 +37,12 @@ d3.csv('/csv/allemp.csv', function (error, data) {
     var yText = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
     var x = d3.scale.linear().domain([0, d3.max(sortedData, barValue)]).range([0, maxBarWidth]);
     // svg container element
-    var chart = d3.select('#all-employees').append("svg")
+    var chartEmp = d3.select('#alljobs').append("svg").attr("class", "chart")
       .attr('width', maxBarWidth + barLabelWidth + valueLabelWidth)
       .attr('height', gridLabelHeight + gridChartOffset + sortedData.length * barHeight);
 
     // grid line labels
-    var gridContainer = chart.append('g')
+    var gridContainer = chartEmp.append('g')
       .attr('transform', 'translate(' + barLabelWidth + ',' + gridLabelHeight + ')'); 
 
     gridContainer.selectAll("text")
@@ -62,7 +62,7 @@ d3.csv('/csv/allemp.csv', function (error, data) {
       .style("stroke", "#ccc");
 
     // bar labels
-    var labelsContainer = chart.append('g')
+    var labelsContainer = chartEmp.append('g')
       .attr('transform', 'translate(' + (barLabelWidth - barLabelPadding) + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
     labelsContainer.selectAll('text').data(sortedData).enter().append('text')
       .attr('y', yText)
@@ -73,10 +73,8 @@ d3.csv('/csv/allemp.csv', function (error, data) {
       .text(barLabel);
 
     // bars
-    var barsContainer = chart.append('g')
+    var barsContainer = chartEmp.append('g')
       .attr('transform', 'translate(' + barLabelWidth + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
-
-      chart.call(tip);
 
     barsContainer.selectAll("rect")
       .data(sortedData).enter().append("rect")
@@ -85,9 +83,7 @@ d3.csv('/csv/allemp.csv', function (error, data) {
       .attr('width', function ( d ) { return x(barValue(d)); })
       .attr('stroke', 'white')
       .attr("id", function ( d,i ) { return barLabel(d); })
-      .attr('fill','#00AE9D')
-      .on('mouseover', tip.show)
-      .on('mouseout', tip.hide);
+      .attr('fill','#00AE9D');
 
     // bar value labels
     barsContainer.selectAll("text")

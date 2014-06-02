@@ -11,15 +11,6 @@ var totalEmp = 379200;
 var barLabel = function(d) { return d['Company']; };
 var barValue = function(d) { return parseFloat(+d['Ratio']); };
 
-var tip = d3.tip()
-    .attr('class', 'd3-tip')
-    .html(function(d) { 
-    return  'Share of Jobs in Hamilton: ' 
-          + '<span>' + d3.round(d.Employees*100/totalEmp, 2) + '%' + '</span>' 
-          + '<br>';
-     })
-    .offset([-12, 0]);
-
 d3.csv('/csv/allemp.csv', function (error, data) {
   
   function renderChart() {
@@ -48,22 +39,25 @@ d3.csv('/csv/allemp.csv', function (error, data) {
 
     if (newData.length > 12) { newData.length = 12 };
 
-    console.log(newData);
     // scales
     var yScale = d3.scale.ordinal().domain(d3.range(0, newData.length)).rangeBands([0, newData.length * barHeight]);
     var y = function(d, i) { return yScale(i); };
     var yText = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
     var x = d3.scale.linear().domain([0, d3.max(newData, barValue)]).range([0, maxBarWidth]);
     // svg container element
-    var chart2 = d3.select('#ratio-employees').append("svg")
+    var chart2 = d3.select('#ratio').append("svg").attr("class", "ratio")
       .attr('width', maxBarWidth + barLabelWidth + valueLabelWidth)
       .attr('height', gridLabelHeight + gridChartOffset + newData.length * barHeight);
 
     // grid line labels
-    var gridContainer = chart2.append('g')
+    var gridContainer2 = chart2.append('g')
       .attr('transform', 'translate(' + barLabelWidth + ',' + gridLabelHeight + ')'); 
 
-    gridContainer.selectAll("text")
+    // bars
+    var barsContainer2 = chart2.append('g')
+      .attr('transform', 'translate(' + barLabelWidth + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
+
+    gridContainer2.selectAll("text")
       .data(x.ticks(3)).enter().append("text")
       .attr("x", x)
       .attr("dy", -3)
@@ -71,7 +65,7 @@ d3.csv('/csv/allemp.csv', function (error, data) {
       .text(function(d){ return d });
 
     // vertical grid lines
-    gridContainer.selectAll("line")
+    gridContainer2.selectAll("line")
       .data(x.ticks(3)).enter().append("line")
       .attr("x1", x)
       .attr("x2", x)
@@ -82,25 +76,20 @@ d3.csv('/csv/allemp.csv', function (error, data) {
     // bar labels
     //  none for this chart
 
-    // bars
-    var barsContainer = chart2.append('g')
-      .attr('transform', 'translate(' + barLabelWidth + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
 
-      chart2.call(tip);
-
-    barsContainer.selectAll("rect")
+    
+    barsContainer2.selectAll("rect.emp")
       .data(newData).enter().append("rect")
       .attr('y', y)
       .attr('height', yScale.rangeBand() - 9)
       .attr('width', function ( d ) { return x(barValue(d)); })
       .attr('stroke', 'white')
       .attr("id", function ( d,i ) { return barLabel(d); })
-      .attr('fill','#00AE9D')
-      .on('mouseover', tip.show)
-      .on('mouseout', tip.hide);
+      .attr("class", "emp")
+      .attr('fill','#00AE9D');
 
     // bar value labels
-    barsContainer.selectAll("text")
+    barsContainer2.selectAll("text")
       .data(newData).enter().append("text")
       .attr("x", function(d) { return x(barValue(d)); })
       .attr("y", yText)
@@ -113,7 +102,7 @@ d3.csv('/csv/allemp.csv', function (error, data) {
       .text(function(d) { return barValue(d); });
 
     // start line
-    barsContainer.append("line")
+    barsContainer2.append("line")
       .attr("y1", -gridChartOffset)
       .attr("y2", yScale.rangeExtent()[1] + gridChartOffset)
       .style("stroke", "#000");
