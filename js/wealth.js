@@ -63,7 +63,7 @@ svg.append("text")
     .attr("text-anchor", "end")
     .attr("x", width)
     .attr("y", height - 6)
-    .text("income per capita, inflation-adjusted (dollars)");
+    .text("income per capita");
 
 // Add a y-axis label.
 svg.append("text")
@@ -104,8 +104,11 @@ d3.json("/js/myNations.json", function(nations) {
 
   var hammer = d3.select("circle#Hamilton.dot"); 
 
-  hammer.style("fill", "url(#image)");
-  
+  hammer.style({
+    "fill": "white",
+    "fill": "url(#image)"
+  });
+
   // Add an overlay for the year label.
   var box = label.node().getBBox();
 
