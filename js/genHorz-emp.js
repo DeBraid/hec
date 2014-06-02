@@ -1,19 +1,23 @@
+var valueLabelWidth = 40; // space reserved for value labels (right)
+var barHeight = 36; // height of one bar
+var barLabelWidth = 100; // space reserved for bar labels
+var barLabelPadding = 5; // padding between bar and bar labels (left)
+var gridLabelHeight = 18; // space reserved for gridline labels
+var gridChartOffset = 10; // space between start of grid and first bar
+var maxBarWidth = 320; // width of the bar with the max value
+
+// accessor functions 
+var barLabel = function(d) { return d['firm']; };
+var barValue = function(d) { return parseFloat(+d['Employees']); };
+
+var addCommas = function(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
 d3.csv('/csv/generaldash.csv', function (error, data) {
   
   function renderChart() {
     
-    var valueLabelWidth = 40; // space reserved for value labels (right)
-    var barHeight = 36; // height of one bar
-    var barLabelWidth = 100; // space reserved for bar labels
-    var barLabelPadding = 5; // padding between bar and bar labels (left)
-    var gridLabelHeight = 18; // space reserved for gridline labels
-    var gridChartOffset = 10; // space between start of grid and first bar
-    var maxBarWidth = 320; // width of the bar with the max value
-     
-    // accessor functions 
-    var barLabel = function(d) { return d['firm']; };
-    var barValue = function(d) { return parseFloat(+d['Employees']); };
-     
     // sorting
     var sortedData = data.sort(function(a, b) {
      return d3.descending(barValue(a), barValue(b));
@@ -34,15 +38,15 @@ d3.csv('/csv/generaldash.csv', function (error, data) {
       .attr('transform', 'translate(' + barLabelWidth + ',' + gridLabelHeight + ')'); 
 
     gridContainer.selectAll("text")
-      .data(x.ticks(6)).enter().append("text")
+      .data(x.ticks(3)).enter().append("text")
       .attr("x", x)
       .attr("dy", -3)
       .attr("text-anchor", "middle")
-      .text(String);
+      .text(function (d) { return addCommas(d); });
 
     // vertical grid lines
     gridContainer.selectAll("line")
-      .data(x.ticks(6)).enter().append("line")
+      .data(x.ticks(3)).enter().append("line")
       .attr("x1", x)
       .attr("x2", x)
       .attr("y1", 0)
@@ -84,7 +88,7 @@ d3.csv('/csv/generaldash.csv', function (error, data) {
       .attr("fill", "black")
       .attr("font-size", "15")
       .attr("stroke", "none")
-      .text(function(d) { return d3.round(barValue(d), 2); });
+      .text(function(d) { return addCommas(d3.round(barValue(d), 2)); });
 
     // start line
     barsContainer.append("line")

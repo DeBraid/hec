@@ -105,7 +105,6 @@ d3.json("/js/myNations.json", function(nations) {
   var hammer = d3.select("circle#Hamilton.dot"); 
 
   hammer.style({
-    "fill": "white",
     "fill": "url(#image)"
   });
 

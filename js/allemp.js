@@ -11,6 +11,10 @@ var totalEmp = 379200;
 var barLabel = function(d) { return d['Company']; };
 var barValue = function(d) { return parseFloat(+d['Employees']); };
 
+var addCommas = function(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
 // var tip = d3.tip()
 //     .attr('class', 'd3-tip')
 //     .html(function(d) { 
@@ -50,7 +54,7 @@ d3.csv('/csv/allemp.csv', function (error, data) {
       .attr("x", x)
       .attr("dy", -3)
       .attr("text-anchor", "middle")
-      .text(function(d){ return d });
+      .text(function(d){ return addCommas(d); });
 
     // vertical grid lines
     gridContainer.selectAll("line")
@@ -96,7 +100,7 @@ d3.csv('/csv/allemp.csv', function (error, data) {
       .attr("fill", "black")
       .attr("font-size", "15")
       .attr("stroke", "none")
-      .text(function(d) { return barValue(d); });
+      .text(function(d) { return addCommas(barValue(d)); });
 
     // start line
     barsContainer.append("line")

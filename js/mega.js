@@ -12,6 +12,10 @@ var tip = d3.tip()
     .html(function(d) { return '<span>' + d3.round((d.gdp/1571741)*100,2) + '</span>' + '% of total economy' })
     .offset([-12, 0]);
 
+var addCommas = function(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
 var barnumber = 10,
     page = 1, 
     _last = document.getElementById('last'),
@@ -84,15 +88,17 @@ function renderChart() {
     chart.call(tip);
 
     gridContainer.selectAll("text")
-      .data(x.ticks(10)).enter().append("text")
+      .data(x.ticks(5)).enter().append("text")
       .attr("x", x)
       .attr("dy", -3)
       .attr("text-anchor", "middle")
-      .text(String);
+      .text(function (d) {
+        return '$' + addCommas(d);
+      });
 
     // vertical grid lines
     gridContainer.selectAll("line")
-      .data(x.ticks(10)).enter().append("line")
+      .data(x.ticks(5)).enter().append("line")
       .attr("x1", x)
       .attr("x2", x)
       .attr("y1", 0)
@@ -129,7 +135,7 @@ function renderChart() {
       .attr("fill", "black")
       .attr("font-size", "15")
       .attr("stroke", "none")
-      .text(function(d) { return "$" + d3.round(barValue(d)*0.001, 3); });
+      .text(function(d) { return "$" + addCommas(barValue(d)); });
 
     // start line
     barsContainer.append("line")
@@ -150,7 +156,7 @@ function renderChart() {
                 .range([0, maxBarWidth]);
 
         gridContainer.selectAll("text")
-          .data(x.ticks(10)).transition.duration(500)
+          .data(x.ticks(5)).transition.duration(500)
           .attr("x", x)
           .attr("dy", -3)
           .attr("text-anchor", "middle")
@@ -158,7 +164,7 @@ function renderChart() {
 
         // vertical grid lines
         gridContainer.selectAll("line")
-          .data(x.ticks(10)).transition.duration(500)
+          .data(x.ticks(5)).transition.duration(500)
           .attr("x1", x)
           .attr("x2", x)
           .attr("y1", 0)
