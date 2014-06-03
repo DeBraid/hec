@@ -44,7 +44,7 @@ text {
 
 .label {
   fill: #777;
-  font-size: 1.2em;
+  font-size: 2.4em;
 }
 
 .year.label {
@@ -59,7 +59,7 @@ text {
 .overlay {
   fill: none;
   pointer-events: all;
-  cursor: ew-resize;
+  cursor: none;
 }
 
 .searched {
