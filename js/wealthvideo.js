@@ -102,6 +102,7 @@ d3.json("/js/myNations.json", function(nations) {
       .call(position)
       .sort(order);
 
+
       customDotLabels();
   // Add an overlay for the year label.
   var box = label.node().getBBox();
@@ -199,6 +200,29 @@ d3.json("/js/myNations.json", function(nations) {
     }
     return a[1];
   }
+
+  function showAllLabels () {
+
+      var tag = svg.append("g")
+        .attr("class", "tag")
+      .selectAll(".tag")
+        .data(interpolateData(1987))
+      .enter().append("text")
+        .attr("class", "tag")
+        .attr("text-anchor", "left")
+        .style("fill", "#000")
+        .text(function(d) { return d.city; })
+        .call(tagposition);
+
+      // Positions the tags based on data.
+      // duplicate of above for text svg element
+      function tagposition(tag) {
+        tag.attr("x", function(d) { return xScale(x(d)); })
+            .attr("y", function(d) { return yScale(y(d)); });
+      }
+  }
+
+
 });
 
 var customDotLabels = function () {
@@ -207,6 +231,22 @@ var customDotLabels = function () {
   hammer.style({
     "fill": "#00628e"
   });
+
+
+}
+
+var customLabels = function (city) {
+  var selectedLabel = d3.select("circle#" + city + ".dot"); 
+
+  selectedLabel
+    .transition().duration(1500).style({
+      "fill": "tomato", 
+      "stroke-width": "5px"
+    })
+    .transition().duration(500).style({
+    "stroke-width": "1px"
+  });
+
 
 
 }
