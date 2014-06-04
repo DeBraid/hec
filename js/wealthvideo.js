@@ -24,7 +24,7 @@ var tip = d3.tip()
     .offset([-12, 0]);
 
 // Chart dimensions.
-var margin = {top: 19.5, right: 19.5, bottom: 109.5, left: 39.5},
+var margin = {top: 19.5, right: 65.5, bottom: 109.5, left: 39.5},
     width = 960 - margin.right,
     height = 600 - margin.top - margin.bottom;
 
@@ -102,8 +102,40 @@ d3.json("/js/myNations.json", function(nations) {
       .call(position)
       .sort(order);
 
+  var tag = svg.append("g")
+      .attr("class", "tag")
+    .selectAll(".tag")
+      .data(interpolateData(1987));
 
-      customDotLabels();
+      customHammerLabel();
+
+var headers = ['Toronto', 'Vancouver', 'Montreal', 'Calgary', 'Halifax', 'Winnipeg', 'Edmonton', 'Kitchener', 'London'];
+
+var color = d3.scale.ordinal()
+      .domain(headers)
+      .range(["#6b486b", "#a05d56", "#d0743c"]);
+
+
+
+var legend = svg.selectAll(".legend")
+  .data(headers.slice())
+      .enter().append("g")
+      .attr("class", "legend")
+      .attr("transform", function(d, i) { return "translate(-20," + i * 20 + ")"; });
+
+  legend.append("rect")
+      .attr("x", width + 40)
+      .attr("width", 18)
+      .attr("height", 18)
+      .attr("id", function (d) { return d; })
+      .style("fill", color);
+
+  legend.append("text")
+        .attr("x", width + 34)
+        .attr("y", 9)
+        .attr("dy", ".35em")
+        .style("text-anchor", "end")
+        .text(function(d) { return d;  });
   // Add an overlay for the year label.
   var box = label.node().getBBox();
 
@@ -201,12 +233,9 @@ d3.json("/js/myNations.json", function(nations) {
     return a[1];
   }
 
-  function showAllLabels () {
+ var showAllLabels = function () {
 
-      var tag = svg.append("g")
-        .attr("class", "tag")
-      .selectAll(".tag")
-        .data(interpolateData(1987))
+      tag
       .enter().append("text")
         .attr("class", "tag")
         .attr("text-anchor", "left")
@@ -220,12 +249,12 @@ d3.json("/js/myNations.json", function(nations) {
         tag.attr("x", function(d) { return xScale(x(d)); })
             .attr("y", function(d) { return yScale(y(d)); });
       }
-  }
+  };
 
 
 });
 
-var customDotLabels = function () {
+var customHammerLabel = function () {
   var hammer = d3.select("circle#Hamilton.dot"); 
 
   hammer.style({
@@ -238,15 +267,33 @@ var customDotLabels = function () {
 var customLabels = function (city) {
   var selectedLabel = d3.select("circle#" + city + ".dot"); 
 
+  var selectedLegendRect = d3.select("rect#" + city)
+
   selectedLabel
     .transition().duration(1500).style({
       "fill": "tomato", 
       "stroke-width": "5px"
     })
     .transition().duration(500).style({
-    "stroke-width": "1px"
-  });
+      "stroke-width": "1px"
+    });
 
+    selectedLegendRect.transition().duration(1500).style({
+      "fill": function (d,i) { color[i] },
+      "stroke": "black", 
+      "stroke-width": "3px"
+    })
+    .transition().duration(500).style({
+      "stroke-width": "1px"
+    });
 
+   // d3.selectAll(".dots").append("text")
+   // .attr({
+   //    "x": function (d,i) { return 50 + "px" }, 
+   //    "y": function (d,i) { return 100 + "px" }
+   //  })
+   // .text(function(d) { return "foo" });
 
 }
+
+var goLabel = showAllLabels();
