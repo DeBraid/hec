@@ -2,7 +2,6 @@
 function x(d) { return d.income; }
 function y(d) { return d.gdp; }
 function radius(d) { return d.uRate; }
-function color(d) { return d.region; }
 function key(d) { return d.city; }
 
 
@@ -32,7 +31,7 @@ var margin = {top: 19.5, right: 65.5, bottom: 109.5, left: 39.5},
 var xScale = d3.scale.linear().domain([18e3, 45e3]).range([0, width]),
     yScale = d3.scale.log().domain([1e3, 4e5]).range([height, 0]),
     radiusScale = d3.scale.sqrt().domain([3, 16]).range([30, 3]),
-    colorScale = d3.scale.category10();
+    colorScale = d3.scale.category20();
 
 // The x & y axes.
 var xAxis = d3.svg.axis().orient("bottom").scale(xScale).ticks(6, d3.format(",d")),
@@ -102,20 +101,7 @@ d3.json("/js/myNations.json", function(nations) {
       .call(position)
       .sort(order);
 
-  var tag = svg.append("g")
-      .attr("class", "tag")
-    .selectAll(".tag")
-      .data(interpolateData(1987));
-
-      customHammerLabel();
-
 var headers = ['Toronto', 'Vancouver', 'Montreal', 'Calgary', 'Halifax', 'Winnipeg', 'Edmonton', 'Kitchener', 'London'];
-
-var color = d3.scale.ordinal()
-      .domain(headers)
-      .range(["#6b486b", "#a05d56", "#d0743c"]);
-
-
 
 var legend = svg.selectAll(".legend")
   .data(headers.slice())
@@ -124,18 +110,18 @@ var legend = svg.selectAll(".legend")
       .attr("transform", function(d, i) { return "translate(-20," + i * 20 + ")"; });
 
   legend.append("rect")
-      .attr("x", width + 40)
+      .attr("x", width + 50)
       .attr("width", 18)
       .attr("height", 18)
-      .attr("id", function (d) { return d; })
-      .style("fill", color);
+      .attr("id", function (d) { return d; });
 
   legend.append("text")
-        .attr("x", width + 34)
+        .attr("x", width + 44)
         .attr("y", 9)
         .attr("dy", ".35em")
         .style("text-anchor", "end")
         .text(function(d) { return d;  });
+
   // Add an overlay for the year label.
   var box = label.node().getBBox();
 
@@ -233,24 +219,8 @@ var legend = svg.selectAll(".legend")
     return a[1];
   }
 
- var showAllLabels = function () {
-
-      tag
-      .enter().append("text")
-        .attr("class", "tag")
-        .attr("text-anchor", "left")
-        .style("fill", "#000")
-        .text(function(d) { return d.city; })
-        .call(tagposition);
-
-      // Positions the tags based on data.
-      // duplicate of above for text svg element
-      function tagposition(tag) {
-        tag.attr("x", function(d) { return xScale(x(d)); })
-            .attr("y", function(d) { return yScale(y(d)); });
-      }
-  };
-
+  customHammerLabel();
+  customFills();
 
 });
 
@@ -258,42 +228,36 @@ var customHammerLabel = function () {
   var hammer = d3.select("circle#Hamilton.dot"); 
 
   hammer.style({
-    "fill": "#00628e"
+    "fill": "#00628e", 
+    "stroke-width": "6px"
   });
 
 
 }
 
-var customLabels = function (city) {
-  var selectedLabel = d3.select("circle#" + city + ".dot"); 
+function customFills () {
 
-  var selectedLegendRect = d3.select("rect#" + city)
+  var fillData = [
+    {"city": "Toronto", "fill": "rgb(174, 199, 232)"},
+    {"city": "Vancouver", "fill": "rgb(255, 127, 14)"},
+    {"city": "Montreal", "fill": "rgb(255, 187, 120)"},
+    {"city": "Calgary", "fill": "rgb(44, 160, 44)"},
+    {"city": "Halifax", "fill": "rgb(152, 223, 138)"},
+    {"city": "Winnipeg", "fill": "rgb(214, 39, 40)"},
+    {"city": "Edmonton", "fill": "rgb(255, 152, 150)"},
+    {"city": "Kitchener", "fill": "rgb(148, 103, 189)"},
+    {"city": "London", "fill": "rgb(197, 176, 213)"}
+  ];
+  
+  fillData.forEach(function (obj) {
 
-  selectedLabel
-    .transition().duration(1500).style({
-      "fill": "tomato", 
-      "stroke-width": "5px"
-    })
-    .transition().duration(500).style({
-      "stroke-width": "1px"
-    });
+      var selectedLabel = d3.selectAll("#" + obj.city); 
 
-    selectedLegendRect.transition().duration(1500).style({
-      "fill": function (d,i) { color[i] },
-      "stroke": "black", 
-      "stroke-width": "3px"
-    })
-    .transition().duration(500).style({
-      "stroke-width": "1px"
-    });
+      selectedLabel
+        .style({
+          "fill": obj.fill
+        })
 
-   // d3.selectAll(".dots").append("text")
-   // .attr({
-   //    "x": function (d,i) { return 50 + "px" }, 
-   //    "y": function (d,i) { return 100 + "px" }
-   //  })
-   // .text(function(d) { return "foo" });
-
+  })
 }
 
-var goLabel = showAllLabels();

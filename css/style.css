@@ -6,6 +6,9 @@
   font-family: 'Roboto', sans-serif !important;
 }
 
+.jumbotron {
+  background-color: #FFF;
+}
 
 #videoballs-container {
   margin-bottom: 100px;
@@ -49,7 +52,7 @@ text {
 
 .label {
   fill: #777;
-  font-size: 2.4em;
+  font-size: 1.6em;
 }
 
 .year.label {
