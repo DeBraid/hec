@@ -6,6 +6,11 @@
   font-family: 'Roboto', sans-serif !important;
 }
 
+
+#videoballs-container {
+  margin-bottom: 100px;
+}
+
 #searchMenu {
   display: inline-block;
 }

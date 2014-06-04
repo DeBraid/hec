@@ -102,12 +102,6 @@ d3.json("/js/myNations.json", function(nations) {
       .call(position)
       .sort(order);
 
-  var hammer = d3.select("circle#Hamilton.dot"); 
-
-  hammer.style({
-    "fill": "url(#image)"
-  });
-
   // Add an overlay for the year label.
   var box = label.node().getBBox();
 
