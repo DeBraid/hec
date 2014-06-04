@@ -78,7 +78,7 @@ var label = svg.append("text")
     .attr("class", "year label")
     .attr("text-anchor", "end")
     .attr("y", height - 24)
-    .attr("x", width)
+    .attr("x", width + 70)
     .text(1987);
 
 // Load the data.
@@ -101,7 +101,7 @@ d3.json("/js/myNations.json", function(nations) {
       .call(position)
       .sort(order);
 
-var headers = ['Toronto', 'Vancouver', 'Montreal', 'Calgary', 'Halifax', 'Winnipeg', 'Edmonton', 'Kitchener', 'London'];
+var headers = ['Hamilton', 'Toronto', 'Vancouver', 'Montreal', 'Calgary', 'Halifax', 'Winnipeg', 'Edmonton', 'Kitchener', 'London'];
 
 var legend = svg.selectAll(".legend")
   .data(headers.slice())
@@ -110,13 +110,13 @@ var legend = svg.selectAll(".legend")
       .attr("transform", function(d, i) { return "translate(-20," + i * 20 + ")"; });
 
   legend.append("rect")
-      .attr("x", width + 50)
+      .attr("x", width + 60)
       .attr("width", 18)
       .attr("height", 18)
       .attr("id", function (d) { return d; });
 
   legend.append("text")
-        .attr("x", width + 44)
+        .attr("x", width + 54)
         .attr("y", 9)
         .attr("dy", ".35em")
         .style("text-anchor", "end")
@@ -226,10 +226,16 @@ var legend = svg.selectAll(".legend")
 
 var customHammerLabel = function () {
   var hammer = d3.select("circle#Hamilton.dot"); 
+  var hammerLeg = d3.select("rect#Hamilton"); 
 
   hammer.style({
     "fill": "#00628e", 
     "stroke-width": "6px"
+  });
+
+  hammerLeg.style({ 
+    "stroke": "black",
+    "stroke-width": "2px"
   });
 
 
@@ -238,6 +244,7 @@ var customHammerLabel = function () {
 function customFills () {
 
   var fillData = [
+    {"city": "Hamilton", "fill": "#00628e"},
     {"city": "Toronto", "fill": "rgb(174, 199, 232)"},
     {"city": "Vancouver", "fill": "rgb(255, 127, 14)"},
     {"city": "Montreal", "fill": "rgb(255, 187, 120)"},
@@ -246,7 +253,7 @@ function customFills () {
     {"city": "Winnipeg", "fill": "rgb(214, 39, 40)"},
     {"city": "Edmonton", "fill": "rgb(255, 152, 150)"},
     {"city": "Kitchener", "fill": "rgb(148, 103, 189)"},
-    {"city": "London", "fill": "rgb(197, 176, 213)"}
+    {"city": "London", "fill": "rgb(197, 176, 213)"},
   ];
   
   fillData.forEach(function (obj) {
