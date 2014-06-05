@@ -229,12 +229,12 @@ var customHammerLabel = function () {
   var hammerLeg = d3.select("rect#Hamilton"); 
 
   hammer.style({
-    "fill": "#00628e", 
+    "fill": "yellow", 
     "stroke-width": "6px"
   });
 
-  hammerLeg.style({ 
-    "stroke": "black",
+  hammerLeg.style({
+    "stroke": "black", 
     "stroke-width": "2px"
   });
 
@@ -244,13 +244,13 @@ var customHammerLabel = function () {
 function customFills () {
 
   var fillData = [
-    {"city": "Hamilton", "fill": "#00628e"},
+    {"city": "Hamilton", "fill": "yellow"},
     {"city": "Toronto", "fill": "rgb(174, 199, 232)"},
     {"city": "Vancouver", "fill": "rgb(255, 127, 14)"},
     {"city": "Montreal", "fill": "rgb(255, 187, 120)"},
     {"city": "Calgary", "fill": "rgb(44, 160, 44)"},
     {"city": "Halifax", "fill": "rgb(152, 223, 138)"},
-    {"city": "Winnipeg", "fill": "rgb(214, 39, 40)"},
+    {"city": "Winnipeg", "fill": "rgb(154, 29, 40)"},
     {"city": "Edmonton", "fill": "rgb(255, 152, 150)"},
     {"city": "Kitchener", "fill": "rgb(148, 103, 189)"},
     {"city": "London", "fill": "rgb(197, 176, 213)"},
