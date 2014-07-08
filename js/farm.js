@@ -5,23 +5,37 @@ var margin = {top: 20, right: 50, bottom: 50, left: 75},
     width = 840 - margin.left - margin.right,
     height = 600 - margin.top - margin.bottom;
 
+    var tip = d3.tip()
+    .attr('class', 'd3-tip')
+    .html(function(d) { 
+          if (d.y) {
+            return '<span>' + d.x + ': ' + d.y + ' %' + '</span>'; 
+          }
+    })
+    .offset([-12, 0]);
+
 var svg = d3.select("#farm").append("svg")
-    .attr("id", "stacked-health-svg")
+    .attr("id", "farm-chart")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+svg.call(tip);
+
+
 d3.csv("/csv/farm.csv", function (data){
 
     var headers = ["qoq","yoy"]
 
-    var layers = d3.layout.stack()(headers.map(function(foo) {
+    var layers = d3.layout.stack()(headers.map(function(datum) {
         return data.map(function(d) {
-          return {x: d.region, y: +d[foo]};
+          return {x: d.region, y: +d[datum]};
         });
     }));
-// console.log(layers);
+
+    console.log(layers);
+
     var yGroupMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y; }); });
     var yStackMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); });
 
@@ -30,8 +44,8 @@ d3.csv("/csv/farm.csv", function (data){
         .rangeRoundBands([25, width], .08);
 
     var y = d3.scale.linear()
-        .domain([0, yStackMax])
-        .range([height, 0]);
+        .domain([0, yGroupMax])
+        .range([height, 50]);
 
     var color = d3.scale.ordinal()
         .domain(headers)
@@ -62,7 +76,9 @@ d3.csv("/csv/farm.csv", function (data){
         .attr("x", function(d) { return xScale(d.x); })
         .attr("y", function(d) { return y(d.y0 + d.y); })
         .attr("width", xScale.rangeBand())
-        .attr("height", function(d) { return y(d.y0) - y(d.y0 + d.y); });
+        .attr("height", function(d) { return y(d.y0) - y(d.y0 + d.y); })
+        .on('mouseover', tip.show)
+        .on('mouseout', tip.hide);
 
     //********** AXES ************
     svg.append("g")
