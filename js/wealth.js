@@ -82,120 +82,124 @@ var label = svg.append("text")
     .attr("x", width)
     .text(1987);
 
-// Load the data.
-d3.json("/js/myNations.json", function(nations) {
+  // Load the data.
+  d3.json("/js/myNations.json", function(nations) {
+   console.log(nations);
+    // A bisector since many nation's data is sparsely-defined.
+    var bisect = d3.bisector(function(d) { return d[0]; });
 
-  // A bisector since many nation's data is sparsely-defined.
-  var bisect = d3.bisector(function(d) { return d[0]; });
+    // Add a dot per nation. Initialize the data at 1987, and set the colors.
+    var dot = svg.append("g")
+        .attr("class", "dots")
+      .selectAll(".dot")
+        .data(interpolateData(1987))
+      .enter().append("circle")
+        .attr("class", "dot")
+        .on('mouseover', tip.show)
+        .on('mouseout', tip.hide)
+        .attr("id", function () { return this.__data__.city; })
+        .style("fill", "#00AE9D")
+        .call(position)
+        .sort(order);
 
-  // Add a dot per nation. Initialize the data at 1987, and set the colors.
-  var dot = svg.append("g")
-      .attr("class", "dots")
-    .selectAll(".dot")
-      .data(interpolateData(1987))
-    .enter().append("circle")
-      .attr("class", "dot")
-      .on('mouseover', tip.show)
-      .on('mouseout', tip.hide)
-      .attr("id", function () { return this.__data__.city; })
-      .style("fill", "#00AE9D")
-      .call(position)
-      .sort(order);
+    // Add an overlay for the year label.
+    var box = label.node().getBBox();
 
-  // Add an overlay for the year label.
-  var box = label.node().getBBox();
+    var overlay = svg.append("rect")
+          .attr("class", "overlay")
+          .attr("x", box.x)
+          .attr("y", box.y + 50)
+          .attr("width", box.width)
+          .attr("height", box.height - 150)
+          .on("mouseover", enableInteraction);
 
-  var overlay = svg.append("rect")
-        .attr("class", "overlay")
-        .attr("x", box.x)
-        .attr("y", box.y + 50)
-        .attr("width", box.width)
-        .attr("height", box.height - 150)
-        .on("mouseover", enableInteraction);
+    // Start a transition that interpolates the data based on year.
+    svg.transition()
+        .duration(50000)
+        .ease("linear")
+        .tween("year", tweenYear)
+        .each("end", enableInteraction);
 
-  // Start a transition that interpolates the data based on year.
-  svg.transition()
-      .duration(50000)
-      .ease("linear")
-      .tween("year", tweenYear)
-      .each("end", enableInteraction);
-
-  // Positions the dots based on data.
-  function position(dot) {
-    dot .attr("cx", function(d) { return xScale(x(d)); })
-        .attr("cy", function(d) { return yScale(y(d)); })
-        .attr("r", function(d) { return radiusScale(radius(d)); });
-  }
-
-  // Defines a sort order so that the smallest dots are drawn on top.
-  function order(a, b) {
-    return radius(b) - radius(a);
-  }
-
-  // After the transition finishes, you can mouseover to change the year.
-  function enableInteraction() {
-    var yearScale = d3.scale.linear()
-        .domain([1987, 2018])
-        .range([box.x + 10, box.x + box.width - 10])
-        .clamp(true);
-
-    // Cancel the current transition, if any.
-    svg.transition().duration(0);
-
-    overlay
-        .on("mouseover", mouseover)
-        .on("mouseout", mouseout)
-        .on("mousemove", mousemove)
-        .on("touchmove", mousemove);
-
-    function mouseover() {
-      label.classed("active", true);
+    // Positions the dots based on data.
+    function position(dot) {
+      dot .attr("cx", function(d) { return xScale(x(d)); })
+          .attr("cy", function(d) { return yScale(y(d)); })
+          .attr("r", function(d) { return radiusScale(radius(d)); });
     }
 
-    function mouseout() {
-      label.classed("active", false);
+    // Defines a sort order so that the smallest dots are drawn on top.
+    function order(a, b) {
+      return radius(b) - radius(a);
     }
 
-    function mousemove() {
-      displayYear(yearScale.invert(d3.mouse(this)[0]));
+    // After the transition finishes, you can mouseover to change the year.
+    function enableInteraction() {
+      var yearScale = d3.scale.linear()
+          .domain([1987, 2018])
+          .range([box.x + 10, box.x + box.width - 10])
+          .clamp(true);
+
+      // Cancel the current transition, if any.
+      svg.transition().duration(0);
+
+      overlay
+          .on("mouseover", mouseover)
+          .on("mouseout", mouseout)
+          .on("mousemove", mousemove)
+          .on("touchmove", mousemove);
+
+      function mouseover() {
+        label.classed("active", true);
+      }
+
+      function mouseout() {
+        label.classed("active", false);
+      }
+
+      function mousemove() {
+        displayYear(yearScale.invert(d3.mouse(this)[0]));
+      }
     }
-  }
 
-  // Tweens the entire chart by first tweening the year, and then the data.
-  // For the interpolated data, the dots and label are redrawn.
-  function tweenYear() {
-    var year = d3.interpolateNumber(1987, 2018);
-    return function(t) { displayYear(year(t)); };
-  }
-
-  // Updates the display to show the specified year.
-  function displayYear(year) {
-    dot.data(interpolateData(year), key).call(position).sort(order);
-    label.text(Math.round(year));
-  }
-
-  // Interpolates the dataset for the given (fractional) year.
-  function interpolateData(year) {
-    return nations.map(function(d) {
-      return {
-        city: d.city,
-        region: d.region,
-        income: interpolateValues(d.income, year),
-        uRate: interpolateValues(d.uRate, year),
-        gdp: interpolateValues(d.gdp, year)
-      };
-    });
-  }
-
-  // Finds (and possibly interpolates) the value for the specified year.
-  function interpolateValues(values, year) {
-    var i = bisect.left(values, year, 0, values.length - 1),
-        a = values[i];
-    if (i > 0) {
-      var b = values[i - 1],
-          t = (year - a[0]) / (b[0] - a[0]);
-      return a[1] * (1 - t) + b[1] * t;
+    // Tweens the entire chart by first tweening the year, and then the data.
+    // For the interpolated data, the dots and label are redrawn.
+    function tweenYear() {
+      var year = d3.interpolateNumber(1987, 2018);
+      return function(t) { displayYear(year(t)); };
     }
-    return a[1];
-  }
-});
+
+    // Updates the display to show the specified year.
+    function displayYear(year) {
+      dot.data(interpolateData(year), key).call(position).sort(order);
+      label.text(Math.round(year));
+    }
+
+    // Interpolates the dataset for the given (fractional) year.
+    function interpolateData(year) {
+      return nations.map(function(d) {
+        return {
+          city: d.city,
+          region: d.region,
+          income: interpolateValues(d.income, year),
+          uRate: interpolateValues(d.uRate, year),
+          gdp: interpolateValues(d.gdp, year)
+        };
+      });
+    }
+
+    // Finds (and possibly interpolates) the value for the specified year.
+    function interpolateValues(values, year) {
+      var i = bisect.left(values, year, 0, values.length - 1),
+          a = values[i];
+      if (i > 0) {
+        var b = values[i - 1],
+            t = (year - a[0]) / (b[0] - a[0]);
+        return a[1] * (1 - t) + b[1] * t;
+      }
+      return a[1];
+    }
+
+    function reset () {
+      d3.selectAll('circle').call(position);
+    }
+  });

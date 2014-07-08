@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="accord">
+<html ng-app="app">
 <head>
 
   <title>Data Viz for #HES2014</title>
@@ -40,20 +40,31 @@
   
       <div class="container-fluid" ng-controller="TypeaheadCtrl">
 
-        <input type="search" ng-model="selected" typeahead="city for city in cities | filter:$viewValue | limitTo:8" class="form-control" id="searchBox" onkeyup="checkFilled()" placeholder="Search for a city...">
+        <input type="search" 
+              ng-model="selected" 
+              typeahead="city for city in cities | filter:$viewValue | limitTo:10" 
+              class="form-control" 
+              id="searchBox" 
+              onkeyup="checkFilled()" 
+              placeholder="Search for a city..."
+              >
 
-      </div>
 
-      <div class="dropdown" ng-controller="DropdownCtrl">
-        <a class="btn btn-danger dropdown-toggle">
-          Hint
-        </a>
-        <div class="dropdown-menu">
-          <li ng-repeat="choice in items">
-            <a onclick="checkFilled()">{{ choice }}</a>
-          </li>
+        <div class="dropdown">
+          <a class="btn btn-danger dropdown-toggle">Hint</a>
+
+          <div class="dropdown-menu">
+            <li ng-repeat="city in cities">
+              <a onclick="checkFilled()">{{ city }}</a>
+            </li>
+          </div>
+
         </div>
+
+
       </div>
+          <a class="btn btn-danger" onclick="reset()">Reset</a>
+
     </div>    
 
     <div id="chart">
