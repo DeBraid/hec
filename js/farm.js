@@ -24,9 +24,9 @@ var svg = d3.select("#farm").append("svg")
 svg.call(tip);
 
 
-d3.csv("/csv/farm.csv", function (data){
+d3.csv( "/csv/farm.csv" , function ( data ){
 
-    var headers = ["qoq","yoy"]
+    var headers = ["qoq" , "yoy" ];
 
     var layers = d3.layout.stack()(headers.map(function(datum) {
         return data.map(function(d) {
@@ -34,10 +34,7 @@ d3.csv("/csv/farm.csv", function (data){
         });
     }));
 
-    console.log(layers);
-
     var yGroupMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y; }); });
-    var yStackMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); });
 
     var xScale = d3.scale.ordinal()
         .domain(layers[0].map(function(d) { return d.x; }))
@@ -73,10 +70,10 @@ d3.csv("/csv/farm.csv", function (data){
     var rect = layer.selectAll("rect")
         .data(function(d) { return d; })
         .enter().append("rect")
-        .attr("x", function(d) { return xScale(d.x); })
-        .attr("y", function(d) { return y(d.y0 + d.y); })
-        .attr("width", xScale.rangeBand())
-        .attr("height", function(d) { return y(d.y0) - y(d.y0 + d.y); })
+        .attr("x", function(d, i, j) { return xScale(d.x) + xScale.rangeBand() / n * j; })
+        .attr("width", xScale.rangeBand() / n)
+        .attr("y", function(d) { return y(d.y); })
+        .attr("height", function(d) { return height - y(d.y); })
         .on('mouseover', tip.show)
         .on('mouseout', tip.hide);
 
@@ -89,9 +86,7 @@ d3.csv("/csv/farm.csv", function (data){
             .attr("dx", "0.45em")
             .attr("class", "farmtext")
             .attr("dy", "1.35em")
-            .attr("transform", function(d) {
-                  return "rotate(0)"
-                });
+            .attr("transform", function(d) { return "rotate(0)" });
 
     svg.append("g")
         .attr("class", "y axis")
@@ -123,23 +118,5 @@ d3.csv("/csv/farm.csv", function (data){
               .attr("dy", ".35em")
               .style("text-anchor", "end")
               .text(function(d) { return d;  });
-
-
-   function transitionGrouped() {
-      y.domain([0, yGroupMax]);
-
-      rect.transition()
-          .duration(1500)
-          .delay(function(d, i) { return i * 10; })
-          .attr("x", function(d, i, j) { return xScale(d.x) + xScale.rangeBand() / n * j; })
-          .attr("width", xScale.rangeBand() / n)
-        .transition()
-          .attr("y", function(d) { return y(d.y); })
-          .attr("height", function(d) { return height - y(d.y); });
-
-    };
-
-
-    transitionGrouped();
 
 });
