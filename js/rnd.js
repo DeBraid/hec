@@ -1,7 +1,7 @@
 var n = 2, // number of layers
-    m = 31; // number of samples per layer
+    m = 20; // number of samples per layer
 
-var margin = {top: 20, right: 50, bottom: 50, left: 75},
+var margin = {top: 20, right: 50, bottom: 200, left: 75},
     width = 840 - margin.left - margin.right,
     height = 600 - margin.top - margin.bottom;
 
@@ -24,9 +24,9 @@ var svg = d3.select("#rnd").append("svg")
 svg.call(tip);
 
 
-d3.csv( "/csv/rndspend2013.csv" , function ( data ){
+d3.csv( "/csv/rndtop20.csv" , function ( data ){
 
-    var headers = ["Spend2012", "Spend2011"];
+    var headers = ["pctChgYoY", "pctOfRev"];
 
 
     var layers = d3.layout.stack()(headers.map(function(datum) {
@@ -84,10 +84,10 @@ d3.csv( "/csv/rndspend2013.csv" , function ( data ){
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis)
         .selectAll("text").style("text-anchor", "end")
-            .attr("dx", "0.45em")
+            .attr("dx", "-0.5em")
             .attr("class", "farmtext")
-            .attr("dy", "1.35em")
-            .attr("transform", function(d) { return "rotate(0)" });
+            .attr("dy", "0em")
+            .attr("transform", function(d) { return "rotate(305)" });
 
     svg.append("g")
         .attr("class", "y axis")
