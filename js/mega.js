@@ -1,4 +1,3 @@
-
 var valueLabelWidth = 70; // space reserved for value labels (right)
 var barHeight = 36; // height of one bar
 var barLabelWidth = 250; // space reserved for bar labels
