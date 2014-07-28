@@ -2,7 +2,7 @@ var n = 3, // number of layers
     m = 30; // number of samples per layer
 
 var margin = {top: 20, right: 50, bottom: 100, left: 35},
-    width = 810 - margin.left - margin.right,
+    width = 760 - margin.left - margin.right,
     height = 600 - margin.top - margin.bottom;
 
     var tip = d3.tip()
@@ -119,6 +119,14 @@ d3.csv( "/csv/nhlcap.csv" , function ( data ){
               .attr("y", 9)
               .attr("dy", ".35em")
               .style("text-anchor", "end")
-              .text(function(d) { return d;  });
+              .text(function(d) { 
+                if ( d == 'fwdspct') {
+                  return 'Forwards'
+                } else if ( d == 'dmenpct') {
+                  return 'Defence'
+                }
+                return 'Goalies';  
+
+              });
 
 });
