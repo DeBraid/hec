@@ -40,15 +40,15 @@ d3.csv('/csv/nhlcap.csv', function (error, data) {
     var yText = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
     var x = d3.scale.linear().domain([0, d3.max(sortedData, barValue)]).range([0, maxBarWidth]);
     // svg container element
-    var chartEmp = d3.select('#cap-space').append("svg").attr("class", "chart")
+    var chartCapSpace = d3.select('#cap-space').append("svg").attr("class", "cap-space")
       .attr('width', maxBarWidth + barLabelWidth + valueLabelWidth)
       .attr('height', gridLabelHeight + gridChartOffset + sortedData.length * barHeight);
 
     // grid line labels
-    var gridContainer = chartEmp.append('g')
+    var gridContainerCapSpace = chartCapSpace.append('g')
       .attr('transform', 'translate(' + barLabelWidth + ',' + gridLabelHeight + ')'); 
 
-    gridContainer.selectAll("text")
+    gridContainerCapSpace.selectAll("text")
       .data(x.ticks(3)).enter().append("text")
       .attr("x", x)
       .attr("dy", -3)
@@ -56,8 +56,8 @@ d3.csv('/csv/nhlcap.csv', function (error, data) {
       .text(function(d){ return addCommas(d); });
 
     // vertical grid lines
-    gridContainer.selectAll("line")
-      .data(x.ticks(2)).enter().append("line")
+    gridContainerCapSpace.selectAll("line")
+      .data(x.ticks(3)).enter().append("line")
       .attr("x1", x)
       .attr("x2", x)
       .attr("y1", 0)
@@ -65,7 +65,7 @@ d3.csv('/csv/nhlcap.csv', function (error, data) {
       .style("stroke", "#ccc");
 
     // bar labels
-    var labelsContainer = chartEmp.append('g')
+    var labelsContainer = chartCapSpace.append('g')
       .attr('transform', 'translate(' + (barLabelWidth - barLabelPadding) + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
     labelsContainer.selectAll('text').data(sortedData).enter().append('text')
       .attr('y', yText)
@@ -76,7 +76,7 @@ d3.csv('/csv/nhlcap.csv', function (error, data) {
       .text(barLabel);
 
     // bars
-    var barsContainer = chartEmp.append('g')
+    var barsContainer = chartCapSpace.append('g')
       .attr('transform', 'translate(' + barLabelWidth + ',' + (gridLabelHeight + gridChartOffset) + ')'); 
 
     barsContainer.selectAll("rect")

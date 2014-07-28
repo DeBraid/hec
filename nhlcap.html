@@ -40,13 +40,18 @@
     <div class="row"> 
       <div class="col-md-9">
         <h2>Cap Allocation by Position</h2>
+        <div class="chart-subtitle">
+          <p><strong>Forwards</strong>: NJD, DAL, EDM, COL, MIN</p>
+          <p><strong>Defence</strong>: WPG, PHI, TBL, WAS, CGY</p>
+          <p><strong>Goalies</strong>: NYR, CGY, MTL, NAS, CAR</p>
+        </div> 
         <div id="position">
           <!-- d3 chart -->
         </div>
       </div>
 
       <div class="col-md-3">
-        <h2>Total Cap Space</h2>
+        <h2>Cap Space</h2>
         <h4>($ Millions)</h4>
         <div id="cap-space">
           <!-- d3 chart -->
@@ -61,6 +66,29 @@
 
   <div class="container">
     <div class="row">
+      <div class="col-lg-12">
+        <h2>Gross $ by Position</h2>
+        <p class="chart-subtitle">Salary Cap: $69 Million</p>
+        <div id="forwards" class="col-md-4" >
+            <h4>Forwards</h4>
+          
+        </div>
+        <div id="Defence" class="col-md-4" >
+            <h4>Defence</h4>
+
+          
+        </div>
+        <div id="Goalies" class="col-md-4" >
+            <h4>Goalies</h4>
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
       <footer> Chart by Derek Braid at <a href="http://cacheflow.ca">cacheflow.ca</a>.  Source <a href="http://stats.nhlnumbers.com/teams">NHL Numbers</a></footer>
     </div>
     <p></p>
@@ -72,5 +100,10 @@
   <script src="/js/d3tip.js"></script>
   <script src="/js/nhlposition.js"></script>
   <script src="/js/nhlcap.js"></script>
+  <script src="/js/nhlforwards.js"></script>
+  <script src="/js/nhldefence.js"></script>
+  <script src="/js/nhlgoalies.js"></script>
+
+
 </body>
 </html>

@@ -80,3 +80,7 @@ text {
 .farmtext {
   font-size: 1.2em;
 }
+
+.chart-subtitle {
+  padding-left: 1.5em;
+}
