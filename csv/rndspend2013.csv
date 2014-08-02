@@ -1,4 +1,4 @@
-Rank2012,Rank2011,Company,Spend2012,Spend2011,pctChgYoY,Revenue2012,pctOfRev,Industry  
+Rank2012,Rank2011,Company,Spend2012,Spend2011,pctChgYoY,Revenue2012,pctOfRev,Industry
 1,2,Bombardier Inc,1900240,1336274,42.2,16761293,11.3,Aerospace 
 2,1,BlackBerry Limited,1508396,1542007,-2.2,11068571,13.6,Telecom Equipment 
 3,3,BCE Inc,576100,569100,1.2,19975000,2.9,Telecomm Services 
@@ -11,7 +11,7 @@ Rank2012,Rank2011,Company,Spend2012,Spend2011,pctChgYoY,Revenue2012,pctOfRev,Ind
 10,nd,Cdn Natural Resources,270000,220000,22.7,14589000,1.9,Oil Gas 
 11,9,AMD Canada,265702,283255,-6.2,nd,Electronic Systems 
 12,11,Cenovus Energy,264000,200000,32.0,16842000,1.6,Oil Gas 
-13,13,Apotex Inc,207745,174003,19.4,1265624,16.4,Pharma Biotech 
+13,13,Apotex Inc,207745,174003,19.4,1265624,16.4,Pharma Biotech
 14,14,Imperial Oil,201000,163000,23.3,31053000,0.6,Oil Gas 
 15,25,GM Canada,186425,96932,92.3,nd,Automotive
 16,12,TELUS Corp,170000,183000,-7.1,10921000,1.6,Telecomm Services 
@@ -22,12 +22,12 @@ Rank2012,Rank2011,Company,Spend2012,Spend2011,pctChgYoY,Revenue2012,pctOfRev,Ind
 21,23,Constellation Software,128769,107645,19.6,890870,14.5,Software  
 22,nd,BRP Inc,128200,129400,-0.9,2896200,4.4,Transportation 
 23,50,Encana Corp,126758,41270,207.1,5157936,2.5,Oil Gas 
-24,15,Sanofi Corp,122408,151695,-19.3,596116,20.5,Pharma Biotech 
+24,15,Sanofi Corp,122408,151695,-19.3,596116,20.5,Pharma Biotech
 25,17,Ontario Power,113000,125000,-9.6,4732000,2.4,Electrical Utilities 
-26,18,GSK Canada,112266,118433,-5.2,947818,11.8,Pharma Biotech 
+26,18,GSK Canada,112266,118433,-5.2,947818,11.8,Pharma Biotech
 27,24,Hydro Quebec,100000,100000,0.0,12228000,0.8,Electrical Utilities 
 28,28,Novartis Canada,98808,90008,9.8,nd,Pharma Biotech
 29,29,CGI Group,95449,86000,11.0,4772454,2.0,Software  
 30,30,PMC Sierra,90345,84997,6.3,137946,65.5,Electronic Systems
-31,20,Pfizer Canada,89920,113544,-20.8,1517214,5.9,Pharma Biotech 
+31,20,Pfizer Canada,89920,113544,-20.8,1517214,5.9,Pharma Biotech
 32,nd,Cisco Canada,87600,98700,-11.2,nd,Telecom Equipment

@@ -31,6 +31,20 @@ d3.csv('/csv/rndspend2013.csv', function (error, data) {
     var sortedData = data.sort(function(a, b) {
      return d3.descending(barValue(a), barValue(b));
     }); 
+
+    console.log(sortedData);
+    console.log("sortedData ^^");
+
+    var mySum = d3.sum(sortedData, function (d,i) {
+      
+        console.log(d);
+      if ( d.Industry == "Pharma Biotech") {
+        return d.Spend2012;
+      }
+    });
+
+    console.log(mySum);
+    console.log("mySum");
     
     // if (sortedData.length > 12) { sortedData.length = 12 };
 
