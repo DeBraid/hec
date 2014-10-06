@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+<title>SANKEY #HES2014</title>
+
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <!-- data and d3 -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
+  <script src="http://d3js.org/queue.v1.min.js"></script>
+  <script src="http://d3js.org/d3.v3.js"></script>
+
+  <!-- Google Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-50537407-1', 'brace.io');
+    ga('send', 'pageview');
+
+  </script>
+</head>
+
+<body>
+
+<div class="row">
+  <div class="container">
+
+    <div class="header">
+      <h1>Manufacturing in Canada</h1>
+      <h3>Weak activity showing up in expanding inventory:sales</h3>
+    </div>
+
+    <div id="line-chart">
+      <!-- d3 sector line chart -->
+    </div>
+  </div>  
+</div> 
+
+<!-- <div class="row">
+  <div class="container">
+
+    <div class="header">
+      <h1>Sizing up Hamilton Economy</h1>
+      <h3>Revenue Relative to total GDP</h3>
+    </div>
+
+    <div id="sankey-chart">
+    
+    </div>
+
+  </div>  
+</div>
+ -->    
+<!-- 
+<div class="row">
+  <div class="container">
+      <div class="col-md-4">
+        <h2>#HES2014 Participants</h2>
+        <ul>
+          <li>Each block and path corresponds to amount of revenue per year.</li>
+          <li>Participant revenue is compared to total GDP for Hamilton.</li>
+          <li>Whitespace denotes sum of economic activity from non-pillar organizations.</li>
+        </ul>
+      </div>
+      
+      <div class="col-md-4">
+        <h2>Sector Breakdown</h2>
+        <ul>
+          <li>Hamilton is the most diverse economy in Canada.</li>
+          <li>Sectors divided according to their relative share of economy.</li>
+          <li>Ranges from ~3% (Creative and IT) to ~20% (Finance, Insurance and Real Estate).</li>
+        </ul>
+      </div>
+
+      <div class="col-md-4">
+        <h2>Industry</h2>
+        <ul>
+          <li>Hamilton again shows balance with even distribution of economic action across industries.</li>
+          <li>Total revenue as percentage of Hamilton GDP is ~12-13%.</li>
+          <li>Participants output nearly equal to whole Manfacturing sector alone.</li>
+        </ul>
+      </div>
+  </div>
+  
+</div>
+
+ -->  
+<script src="/js/manuf.js"></script>
+<!-- <script src="/js/d3sankey.js"></script>
+<script src="/js/citysank.js"></script>
+ -->
+</body>
+</html>
+
